@@ -96,7 +96,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-1 col-sm-12">
+                                            
 
                                         <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-online">{{ __('Retorno') }}</label><br>
