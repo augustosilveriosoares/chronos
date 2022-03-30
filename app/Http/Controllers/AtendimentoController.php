@@ -115,7 +115,7 @@ class AtendimentoController extends Controller
 
 
         if ($request->has('isretorno')) {
-            
+
             $atendimento->retorno = 1;
 
 
@@ -137,9 +137,9 @@ class AtendimentoController extends Controller
     }
 
     public function zap(Request $request){
-        
+
         try {
-            
+
             $data = $request->all();
             $dados_formatados = [
                 'necessidade_id' => isset($data['necessidadeid']) ? $data['necessidadeid'] : null,
@@ -148,7 +148,9 @@ class AtendimentoController extends Controller
                 'cidade_id' => isset($data['cidadeid']) ? $data['cidadeid'] : null,
                 'nome' => isset($data['nome']) ? $data['nome'] : null,
                 'whats' => isset($data['whats']) ? $data['whats'] : null,
-                'email' => isset($data['email']) ? $data['email'] : null
+                'email' => isset($data['email']) ? $data['email'] : null,
+                'idade' => isset($data['idade']) ? $data['idade'] : null,
+                'anoscontribuicao' => isset($data['anoscontribuicao']) ? $data['anoscontribuicao'] : null
             ];
 
             if(isset($data['online']) && $data['online'] == true){
@@ -157,7 +159,7 @@ class AtendimentoController extends Controller
             if(isset($data['presencial']) && $data['online'] == true){
                 $dados_formatados['online'] = false;
             }
-            
+
             //return json_encode([$dados_formatados,$data]);
             Atendimento::create($dados_formatados);
             return response("Atendimento criado com sucesso!", 200);
