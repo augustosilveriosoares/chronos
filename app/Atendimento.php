@@ -57,6 +57,12 @@ class Atendimento extends Model
 
     }
 
+    public function cidade(){
+
+        return $this->belongsTo(Cidade::class);
+
+    }
+
     public function observacoes()
     {
         return $this->hasMany(ObservacaoAtendimento::class);

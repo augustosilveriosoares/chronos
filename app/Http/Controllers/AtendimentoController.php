@@ -11,6 +11,7 @@ use App\Situacao;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
+use function PHPUnit\Framework\isNull;
 
 class AtendimentoController extends Controller
 {
@@ -32,7 +33,7 @@ class AtendimentoController extends Controller
 
     }
 
-      public function create(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade){
+    public function create(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade){
 
         $atendimento = new Atendimento();
         $atendimento->datacadastro = now();
@@ -51,8 +52,19 @@ class AtendimentoController extends Controller
 
     public function store(Request $request,Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade){
 
+        $atendimento = new Atendimento($request->all());
 
-        $atendimento->create($request->all());
+
+        if($atendimento->situacao->descricao == 'Pendente'){
+            if($request->filled('dataagendamento')){
+                
+                $situacao =  Situacao::where('descricao','=','Agendado')->first();
+                $atendimento->situacao_id = $situacao->id;
+            }
+        }
+
+
+        $atendimento->save();
 
         return redirect()->route('atendimentos.index',[ 'atendimento' => $atendimento,
             'sexos' => $sexo->all(),
@@ -77,6 +89,7 @@ class AtendimentoController extends Controller
             'cidades' => $cidade->all(),
         ]);
     }
+
     public function showByCalendar(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ){
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
@@ -105,6 +118,14 @@ class AtendimentoController extends Controller
 
         $atendimento->update($request->all());
 
+
+        if($atendimento->situacao->descricao == 'Pendente'){
+            if($request->filled('dataagendamento')){
+                $situacao =  Situacao::where('descricao','=','Agendado')->first();
+                $atendimento->situacao_id = $situacao->id;
+            }
+        }
+
         if ($request->has('isonline')) {
             $atendimento->online = 1;
             $atendimento->cidade_id = null;
@@ -124,9 +145,9 @@ class AtendimentoController extends Controller
             $atendimento->retorno = 0;
         }
         $atendimento->save();
+
         return redirect()->route('atendimentos.index')->withStatus(__('Atualizado com sucesso!'));
     }
-
 
     public function destroy(Atendimento $atendimento){
 
