@@ -40,7 +40,7 @@
                                             </div>
 
 
-                                            <div class="col-lg-4 col-sm-12">
+                                            <div class="col-lg-6 col-sm-12">
                                                 <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Nome') }}</label>
                                                     <input type="text" name="nome" id="input-nome" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome') }}" value="{{ old('nome', $atendimento->nome??'') }}" required autofocus>
@@ -77,7 +77,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-1 col-sm-12">
+                                            <div class="col-lg-1 col-sm-6 col-md-6">
                                                 <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-online">{{ __('Online') }}</label><br>
                                                     <label class="custom-toggle mt-1">
@@ -96,18 +96,18 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-1 col-sm-12">
+                                            <div class="col-lg-1 col-sm-6 col-md-6">
 
-                                        <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
+                                        <div class="form-group{{ $errors->has('retorno') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-online">{{ __('Retorno') }}</label><br>
                                             <label class="custom-toggle mt-1">
 
-                                                @if($atendimento->isOnline())
-                                                    <input type="hidden" name="online" value="1">
+                                                @if($atendimento->isRetorno())
+                                                    <input type="hidden" name="retorno" value="1">
                                                 @else
-                                                    <input type="hidden" name="online" value="0">
+                                                    <input type="hidden" name="retorno" value="0">
                                                 @endif
-                                                <input type="checkbox"  name="isonline" id="isonline"  {{$atendimento->isOnline() ? 'checked' : ''}} >
+                                                <input type="checkbox"  name="isretorno" id="isretorno"  {{$atendimento->isRetorno() ? 'checked' : ''}} >
                                                 <span class="custom-toggle-slider rounded-circle"  data-label-off="Não" data-label-on="Sim" ></span>
 
                                             </label>
@@ -120,7 +120,7 @@
                                         </div>
                                 <div class="row">
 
-                                            <div class="col-lg-4 col-sm-12">
+                                            <div class="col-lg-3 col-sm-12">
                                                 <div class="form-group{{ $errors->has('whats') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Whats') }}</label>
                                                     <input type="text" name="whats" id="input-whats" class="form-control{{ $errors->has('whats') ? ' is-invalid' : '' }}" placeholder="{{ __('Whats') }}" value="{{ old('whats', $atendimento->whats??'') }}" required autofocus>
@@ -128,7 +128,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-4 col-sm-12">
+                                            <div class="col-lg-3 col-sm-12">
                                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-idade">{{ __('E-mail') }}</label>
                                                     <input type="text" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $atendimento->email??'') }}" required autofocus>
@@ -136,7 +136,7 @@
                                                 </div>
 
                                             </div>
-                                    <div class="col-lg-2 col-sm-12">
+                                            <div class="col-lg-3 col-sm-12">
                                         <div class="form-group{{ $errors->has('necessidade_id') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-idade">{{ __('Necessidade') }}</label>
                                             <select name="necessidade_id" id="input-necessidade" class="form-control{{ $errors->has('necessidade_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Necessidade') }}" required>
@@ -150,7 +150,7 @@
                                         </div>
 
                                     </div>
-                                            <div class="col-lg-4 col-sm-12">
+                                            <div class="col-lg-3 col-sm-12">
                                                 <div class="form-group{{ $errors->has('atuacao_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-atuacao">{{ __('Atuação') }}</label>
                                                     <select name="atuacao_id" id="input-atuacao" class="form-control{{ $errors->has('atuacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Atuação') }}" required>

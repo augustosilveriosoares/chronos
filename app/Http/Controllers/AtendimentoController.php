@@ -108,10 +108,20 @@ class AtendimentoController extends Controller
         if ($request->has('isonline')) {
             $atendimento->online = 1;
             $atendimento->cidade_id = null;
-
         }
         else {
             $atendimento->online = 0;
+        }
+
+
+        if ($request->has('isretorno')) {
+            
+            $atendimento->retorno = 1;
+
+
+        }
+        else {
+            $atendimento->retorno = 0;
         }
         $atendimento->save();
         return redirect()->route('atendimentos.index')->withStatus(__('Atualizado com sucesso!'));
