@@ -58,7 +58,7 @@
                                 <tr>
                                     <td >
                                             <span class="avatar avatar-sm rounded-circle mr-1 ">
-                                                <img src="{{$atendimento->user->picture}}" alt="" style="max-width: 100px; border-radiu: 25px">
+                                                <img src="{{$atendimento->user->image??''}}" alt="" style="max-width: 100px; border-radiu: 25px">
 
                                             </span>
 
