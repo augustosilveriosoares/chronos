@@ -98,16 +98,16 @@
                                             </div>
                                             <div class="col-lg-1 col-sm-6 col-md-6">
 
-                                        <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
+                                        <div class="form-group{{ $errors->has('retorno') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-online">{{ __('Retorno') }}</label><br>
                                             <label class="custom-toggle mt-1">
 
-                                                @if($atendimento->isOnline())
-                                                    <input type="hidden" name="online" value="1">
+                                                @if($atendimento->isRetorno())
+                                                    <input type="hidden" name="retorno" value="1">
                                                 @else
-                                                    <input type="hidden" name="online" value="0">
+                                                    <input type="hidden" name="retorno" value="0">
                                                 @endif
-                                                <input type="checkbox"  name="isonline" id="isonline"  {{$atendimento->isOnline() ? 'checked' : ''}} >
+                                                <input type="checkbox"  name="isretorno" id="isretorno"  {{$atendimento->isRetorno() ? 'checked' : ''}} >
                                                 <span class="custom-toggle-slider rounded-circle"  data-label-off="Não" data-label-on="Sim" ></span>
 
                                             </label>

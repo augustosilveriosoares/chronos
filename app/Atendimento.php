@@ -26,8 +26,8 @@ class Atendimento extends Model
         'dataagendamento',
         'cidade_id',
         'online',
-        'retorno',
-        'vaoeveç atemdo,emtpa'
+        'retorno'
+
 
     ];
 
@@ -75,6 +75,14 @@ class Atendimento extends Model
 
     public function isOnline(){
         if ($this->online == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function isRetorno(){
+        if ($this->retorno == 1){
             return true;
         }else{
             return false;
