@@ -164,8 +164,6 @@ class AtendimentoController extends Controller
             Atendimento::create($dados_formatados);
             return response("Atendimento criado com sucesso!", 200);
 
-            return http_response_code(200);
-
         } catch (\Throwable $th) {
             return response($th->getMessage(), 500);
         }
