@@ -19,6 +19,8 @@ Route::get('dashboard', 'HomeController@index')->name('home');
 Route::get('pricing', 'PageController@pricing')->name('page.pricing');
 Route::get('lock', 'PageController@lock')->name('page.lock');
 
+Route::post('zap','AtendimentoController@zap')->name('zap');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
     Route::resource('atendimentos', 'AtendimentoController');

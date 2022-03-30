@@ -16,7 +16,7 @@ class CreateAtendimentosTable extends Migration
         Schema::create('atendimentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('situacao_id')->references('id')->on('situacaos');
-            $table->foreignId('sexo_id')->references('id')->on('sexos');
+            $table->foreignId('sexo_id')->references('id')->on('sexos')->nullable();
             $table->foreignId('atuacao_id')->references('id')->on('atuacaos');
             $table->foreignId('necessidade_id')->references('id')->on('necessidades');
             $table->foreignId('user_id')->nullable()->references('id')->on('users');

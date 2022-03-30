@@ -126,4 +126,39 @@ class AtendimentoController extends Controller
         return redirect()->route('atendimentos.index')->withErrors(__('Atendimento Excluido.'));
     }
 
+    public function zap(Request $request){
+        
+        try {
+            
+            $data = $request->all();
+            $dados_formatados = [
+                'necessidade_id' => isset($data['necessidadeid']) ? $data['necessidadeid'] : null,
+                'situacao_id' => isset($data['situacaoid']) ? $data['situacaoid'] : null,
+                'atuacao_id' => isset($data['atuacaoid']) ? $data['atuacaoid'] : null,
+                'cidade_id' => isset($data['cidadeid']) ? $data['cidadeid'] : null,
+                'nome' => isset($data['nome']) ? $data['nome'] : null,
+                'whats' => isset($data['whats']) ? $data['whats'] : null,
+                'email' => isset($data['email']) ? $data['email'] : null
+            ];
+
+            if(isset($data['online']) && $data['online'] == true){
+                $dados_formatados['online'] = true;
+            }
+            if(isset($data['presencial']) && $data['online'] == true){
+                $dados_formatados['online'] = false;
+            }
+            
+            //return json_encode([$dados_formatados,$data]);
+            Atendimento::create($dados_formatados);
+            return response("Atendimento criado com sucesso!", 200);
+
+            return http_response_code(200);
+
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+        }
+
+
+    }
+
 }
