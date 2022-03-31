@@ -11,30 +11,96 @@
 
     <div class="container-fluid mt--6">
         <div class="row">
-            <div class="col-xl-12 order-xl-1">
+            <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 order-xl-1">
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <span><h4>{{$atendimento->nome ?? ''}}  </h4></span>
-                                <span class="text-muted small">Criado em {{date('d-m-Y', strtotime($atendimento->datacadastro))}} </span>
+
                             </div>
-                            <div class="col-4 text-right">
-                                <a href="{{ route('atendimentos.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
-                            </div>
+
                         </div>
                     </div>
                     <div class="card-body bg-secondary">
 
                         <div class="row">
-                            <div class="col"><span>Necessidade</span></div>
-                            <div class="col"><span>col</span></div>
-                            <div class="col"><span>col</span></div>
-                            <div class="col"><span>col</span></div>
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Tipo Atendimento</h6>
+                                <h4>{{$atendimento->tipoatendimento->descricao ?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Necessidade</h6>
+                                <h4>{{$atendimento->necessidade->descricao?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Atuação</h6>
+                                <h4>{{$atendimento->atuacao->descricao?? ''}}</h4>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Idade</h6>
+                                <h4>{{$atendimento->idade ?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Contribuição</h6>
+                                <h4>{{$atendimento->anoscontribuicao ?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <h6 class="text-gray">Forma</h6>
+                                <h4>{{$atendimento->isOnline() ? 'Online':'Presencial'}}</h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-xl-12  col-sm-12 order-xl-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <span><h4>Encaminhar para </h4></span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body bg-secondary">
+
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-situacao">{{ __('Situação') }}</label>
+                                    <select name="situacao_id" id="input-situacao" class="form-control{{ $errors->has('situacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Situação') }}" >
+                                        @foreach ($situacoes as $sit)
+                                            <option value="{{ $sit->id }}" {{ $sit->id == old('situacao_id',$atendimento->situacao_id) ? 'selected' : '' }}>{{ $sit->descricao }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'idade'])
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 mt-lg-4 ">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-warning btn-lg btn-block">{{ __('Salvar') }}</button>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -53,18 +119,12 @@
                                 <div class="mb-1">
                                     @foreach($atendimento->observacoes as $obs)
                                         <div class="media media-comment mb-3">
-                                            <img alt="Image placeholder" class="avatar avatar-lg media-comment-avatar rounded-circle" src="{{$obs->user->picture ?? ''}}">
+                                            <img alt="Image placeholder" class="avatar avatar-sm media-comment-avatar rounded-circle" src="{{$obs->user->picture ?? ''}}">
                                             <div class="media-body">
                                                 <div class="media-comment-text">
-                                                    <h6 class="h5 mt-0">{{$obs->user->name}}</h6>
+                                                    <h6 class="h5 mt-0">{{$obs->user->name}} - <span class="text-muted small">{{$obs->data}}</span> </h6>
                                                     <p class="text-sm lh-160">{{$obs->descricao}}</p>
-                                                    <div class="icon-actions">
-                                                        <a href="#" class="like active">
 
-                                                            <span class="text-muted small">{{$obs->data}}</span>
-                                                        </a>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,23 +136,32 @@
                                             @csrf
                                             @method('POST')
 
+                                             <div class="row">
+                                                 <div class="col-lg-11 col-md-10">
+                                                     <div class="media align-items-center">
+                                                         <img alt="Image placeholder" class="avatar avatar-xs rounded-circle mr-4" src="{{ auth()->user()->picture}}">
+                                                         <div class="media-body">
 
-                                            <div class="media align-items-center">
-                                                <img alt="Image placeholder" class="avatar avatar-lg rounded-circle mr-4" src="{{ auth()->user()->picture}}">
-                                                <div class="media-body">
+                                                             <input type="hidden" name="atendimento_id" id="input-id" class="form-control"  value="{{$atendimento->id??''}}"  >
+                                                             <input type="hidden" name="user_id" id="input-id" class="form-control"  value="{{auth()->user()->id ??''}}"  >
+                                                             <textarea name="descricao" class="form-control" placeholder="Escreva sua observação" rows="1"></textarea>
 
-                                                    <input type="hidden" name="atendimento_id" id="input-id" class="form-control"  value="{{$atendimento->id??''}}"  >
-                                                    <input type="hidden" name="user_id" id="input-id" class="form-control"  value="{{auth()->user()->id ??''}}"  >
-                                                    <textarea name="descricao" class="form-control" placeholder="Escreva sua observação" rows="1"></textarea>
 
-                                                </div>
-                                            </div>
-                                            <div class="row mt-3">
-                                                <div class="col text-center">
-                                                    <button type="submit" class="btn btn-success  btn-lg">{{ __('Salvar') }}</button>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-lg-1 col-md-2 mt-sm-3 mt-lg-1 mt-2 ">
+                                                     <div class="col text-center">
+                                                         <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Salvar') }}</button>
 
-                                                </div>
-                                            </div>
+                                                     </div>
+                                                 </div>
+
+                                             </div>
+
+
+
+
                                         </form>
                                     @endif
 
@@ -167,3 +236,4 @@
     </script>
 
 @endpush
+

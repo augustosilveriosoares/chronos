@@ -21,6 +21,8 @@ class CreateAtendimentosTable extends Migration
             $table->foreignId('necessidade_id')->references('id')->on('necessidades');
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->foreignId('cidade_id')->nullable()->references('id')->on('cidades');
+            $table->foreignId('tipoatendimento_id')->nullable()->references('id')->on('tipo_atendimentos');
+
             $table->string('nome')->nullable();;
             $table->string('idade')->nullable();;
             $table->string('anoscontribuicao')->nullable();;

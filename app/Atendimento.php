@@ -26,7 +26,8 @@ class Atendimento extends Model
         'dataagendamento',
         'cidade_id',
         'online',
-        'retorno'
+        'retorno',
+        'tipoatendimento_id'
 
 
     ];
@@ -76,6 +77,11 @@ class Atendimento extends Model
     public function agendamentos(){
 
         return $this->belongsTo(Event::class);
+
+    }
+    public function tipoatendimento(){
+
+        return $this->belongsTo(TipoAtendimento::class);
 
     }
 
