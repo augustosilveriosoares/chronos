@@ -10,6 +10,7 @@ use App\Sexo;
 use App\Situacao;
 use App\TipoAtendimento;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
 use function PHPUnit\Framework\isNull;
@@ -24,13 +25,22 @@ class AtendimentoController extends Controller
 //    }
 
 
-    public function index(Atendimento $atendimentos)    {
+    public function index(Atendimento $atendimentos ,Situacao $situacoes, Cidade $cidades)    {
+
+        $datainicial = date('Y-m-d', strtotime('01-01-2022'));;
+        $datafinal = Carbon::now();
 
         $this->authorize('manage-items', User::class);
 
+        $advogados = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
+
         $situacao = DB::table('situacaos')->where('descricao','=','Cancelado')->get()->first();
         $atendimentos = Atendimento::where('situacao_id', '!=', $situacao->id)->paginate(10);
-        return view('atendimentos.index', ['atendimentos' => $atendimentos]);
+        return view('atendimentos.index', ['atendimentos' => $atendimentos,
+            'situacoes'=>$situacoes->all(),'advogados'=>$advogados->all(),
+            'cidades'=> $cidades->all(),
+            'datainicial' => $datainicial,
+            'datafinal' => $datafinal]);
 
     }
 
