@@ -108,7 +108,26 @@
     //
     // Fullcalendar
     //
-    var options = {
+
+    'use strict';
+
+    var Fullcalendar = (function() {
+
+        // Variables
+
+        var $calendar = $('[data-toggle="calendar"]');
+
+        //
+        // Methods
+        //
+
+        // Init
+        function init($this) {
+
+            // Full calendar options
+            // For more options read the official docs: https://fullcalendar.io/docs
+
+            var options = {
                 header: {
                     left: 'prev,next today',
                     center: ' title ',
@@ -129,9 +148,15 @@
                     url: "{{route('fullcalendar.index')}}"
                 },
 
-                // dayClick: function(date) {
-                //     $this.fullCalendar('changeView', 'basicDay');
-                // },
+                dayClick: function(date, jsEvent, view) {
+
+                    $this.fullCalendar('gotoDate',date);
+                    //'basicDay'
+                    $this.fullCalendar('changeView','agendaDay');
+
+                },
+
+
 
                 // viewRender: function(view) {
                 //     var calendarDate = $this.fullCalendar('getDate');
@@ -151,25 +176,6 @@
 
                 }
             };
-    'use strict';
-
-    var Fullcalendar = (function() {
-
-        // Variables
-
-        var $calendar = $('[data-toggle="calendar"]');
-
-        //
-        // Methods
-        //
-
-        // Init
-        function init($this,options) {
-
-            // Full calendar options
-            // For more options read the official docs: https://fullcalendar.io/docs
-
-            
 
             // Initalize the calendar plugin
             $this.fullCalendar(options);
@@ -207,7 +213,7 @@
 
         // Init
         if ($calendar.length) {
-            init($calendar,options);
+            init($calendar);
         }
 
 
