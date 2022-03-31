@@ -8,6 +8,7 @@ use App\Cidade;
 use App\Necessidade;
 use App\Sexo;
 use App\Situacao;
+use App\TipoAtendimento;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
@@ -74,7 +75,7 @@ class AtendimentoController extends Controller
             'cidades' => $cidade->all()])->withStatus(__('Atendimento Criado!'));
     }
 
-    public function show(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ){
+    public function show(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade, TipoAtendimento $tipoAtendimento){
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
 
@@ -86,10 +87,12 @@ class AtendimentoController extends Controller
             'situacoes' => $situacoes->all(),
             'advogados' => $advogado,
             'cidades' => $cidade->all(),
+            'tipoatendimento' => $tipoAtendimento->all(),
+
         ]);
     }
 
-    public function showByCalendar(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ){
+    public function showByCalendar(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade, TipoAtendimento $tipoAtendimento){
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
         $id = $request->input('atendimento_id_');
@@ -104,6 +107,7 @@ class AtendimentoController extends Controller
             'situacoes' => $situacoes->all(),
             'advogados' => $advogado,
             'cidades' => $cidade->all(),
+            'tipoatendimento' => $tipoAtendimento->all(),
         ]);
     }
 
@@ -190,7 +194,7 @@ class AtendimentoController extends Controller
 
 
     }
-    public function showByCalendarEvent(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ){
+    public function showByCalendarEvent(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ,TipoAtendimento $tipoAtendimento){
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
         $id = $request->input('atendimento_id_');
@@ -205,6 +209,7 @@ class AtendimentoController extends Controller
             'situacoes' => $situacoes->all(),
             'advogados' => $advogado,
             'cidades' => $cidade->all(),
+            'tipoatendimento' => $tipoAtendimento->all(),
         ]);
     }
 

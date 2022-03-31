@@ -28,25 +28,57 @@
                         @if($atendimento->id)
                             <form method="post" action="{{ route('atendimentos.update', $atendimento) }}" autocomplete="off">
                                 @method('put')
-                        @else
-                            <form method="post" action="{{ route('atendimentos.store', $atendimento) }}" autocomplete="off">
-                        @endif
-                            @csrf
-                                <div class="row">
-
-                                            <div class="form-group{{ $errors->has('datacadastro') ? ' has-danger' : '' }}">
-                                                <input type="hidden" name="datacadastro" id="" class="form-control{{ $errors->has('datacadastro') ? ' is-invalid' : '' }}" placeholder="{{ __('Data') }}" value="{{date('Y-m-d\TH:i', strtotime($atendimento->datacadastro))}}"  >
-                                                @include('alerts.feedback', ['field' => 'datacadastro'])
-                                            </div>
-
-
-                                            <div class="col-lg-6 col-sm-12">
+                                @else
+                                    <form method="post" action="{{ route('atendimentos.store', $atendimento) }}" autocomplete="off">
+                                        @endif
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-7 col-sm-12">
                                                 <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Nome') }}</label>
                                                     <input type="text" name="nome" id="input-nome" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome') }}" value="{{ old('nome', $atendimento->nome??'') }}" required autofocus>
                                                     @include('alerts.feedback', ['field' => 'name'])
                                                 </div>
 
+                                            </div>
+                                            <div class="col-lg-3 col-sm-8">
+                                                <div class="form-group{{ $errors->has('tipoatendimento_id') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-idade">{{ __('Tipo') }}</label>
+                                                    <select name="tipoatendimento_id" id="input-sexo" class="form-control{{ $errors->has('tipoatendimento_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Tipo') }}" required>
+                                                        <option value="">-</option>
+                                                        @foreach ($tipoatendimento as $tipo)
+                                                            <option value="{{ $tipo->id }}" {{ $tipo->id == old('tipoatendimento_id',$atendimento->tipoatendimento_id) ? 'selected' : '' }}>{{ $tipo->descricao }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @include('alerts.feedback', ['field' => 'idade'])
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-2 col-sm-4">
+                                                <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-online">{{ __('Online') }}</label><br>
+                                                    <label class="custom-toggle mt-1">
+
+                                                        @if($atendimento->isOnline())
+                                                            <input type="hidden" name="online" value="1">
+                                                        @else
+                                                            <input type="hidden" name="online" value="0">
+                                                        @endif
+                                                        <input type="checkbox"  name="isonline" id="isonline"  {{$atendimento->isOnline() ? 'checked' : ''}} >
+                                                        <span class="custom-toggle-slider rounded-circle"  data-label-off="Não" data-label-on="Sim" ></span>
+
+                                                    </label>
+
+                                                    @include('alerts.feedback', ['field' => 'online'])
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group{{ $errors->has('datacadastro') ? ' has-danger' : '' }}">
+                                                <input type="hidden" name="datacadastro" id="" class="form-control{{ $errors->has('datacadastro') ? ' is-invalid' : '' }}" placeholder="{{ __('Data') }}" value="{{date('Y-m-d\TH:i', strtotime($atendimento->datacadastro))}}"  >
+                                                @include('alerts.feedback', ['field' => 'datacadastro'])
                                             </div>
                                             <div class="col-lg-1 col-sm-6">
                                                 <div class="form-group{{ $errors->has('idade') ? ' has-danger' : '' }}">
@@ -56,7 +88,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-1 col-sm-6">
+                                            <div class="col-lg-2 col-sm-6">
                                                 <div class="form-group{{ $errors->has('contribuicao') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-contribuicao">{{ __('Contribuição') }}</label>
                                                     <input type="text" name="anoscontribuicao" id="input-anoscontribuicao" class="form-control{{ $errors->has('anoscontribuicao') ? ' is-invalid' : '' }}" placeholder="{{ __('Contribuição') }}" value="{{ old('anoscontribuicao', $atendimento->anoscontribuicao ??'') }}" required autofocus>
@@ -77,50 +109,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-1 col-sm-6 col-md-6">
-                                                <div class="form-group{{ $errors->has('online') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="input-online">{{ __('Online') }}</label><br>
-                                                    <label class="custom-toggle mt-1">
-
-                                                         @if($atendimento->isOnline())
-                                                            <input type="hidden" name="online" value="1">
-                                                        @else
-                                                            <input type="hidden" name="online" value="0">
-                                                        @endif
-                                                        <input type="checkbox"  name="isonline" id="isonline"  {{$atendimento->isOnline() ? 'checked' : ''}} >
-                                                        <span class="custom-toggle-slider rounded-circle"  data-label-off="Não" data-label-on="Sim" ></span>
-
-                                                    </label>
-
-                                                    @include('alerts.feedback', ['field' => 'online'])
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-1 col-sm-6 col-md-6">
-
-                                        <div class="form-group{{ $errors->has('retorno') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-online">{{ __('Retorno') }}</label><br>
-                                            <label class="custom-toggle mt-1">
-
-                                                @if($atendimento->isRetorno())
-                                                    <input type="hidden" name="retorno" value="1">
-                                                @else
-                                                    <input type="hidden" name="retorno" value="0">
-                                                @endif
-                                                <input type="checkbox"  name="isretorno" id="isretorno"  {{$atendimento->isRetorno() ? 'checked' : ''}} >
-                                                <span class="custom-toggle-slider rounded-circle"  data-label-off="Não" data-label-on="Sim" ></span>
-
-                                            </label>
-
-                                            @include('alerts.feedback', ['field' => 'online'])
-                                        </div>
-
-                                    </div>
-
-                                        </div>
-                                <div class="row">
-
-                                            <div class="col-lg-3 col-sm-12">
+                                            <div class="col-lg-7 col-sm-12">
                                                 <div class="form-group{{ $errors->has('whats') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Whats') }}</label>
                                                     <input type="text" name="whats" id="input-whats" class="form-control{{ $errors->has('whats') ? ' is-invalid' : '' }}" placeholder="{{ __('Whats') }}" value="{{ old('whats', $atendimento->whats??'') }}" required autofocus>
@@ -128,7 +117,9 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-3 col-sm-12">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-idade">{{ __('E-mail') }}</label>
                                                     <input type="text" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $atendimento->email??'') }}" required autofocus>
@@ -136,21 +127,21 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-3 col-sm-12">
-                                        <div class="form-group{{ $errors->has('necessidade_id') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-idade">{{ __('Necessidade') }}</label>
-                                            <select name="necessidade_id" id="input-necessidade" class="form-control{{ $errors->has('necessidade_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Necessidade') }}" required>
-                                                <option value="">-</option>
-                                                @foreach ($necessidades as $nec)
-                                                    <option value="{{ $nec->id }}" {{ $nec->id == old('necessidade_id',$atendimento->necessidade_id) ? 'selected' : '' }}>{{ $nec->descricao }}</option>
-                                                @endforeach
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="form-group{{ $errors->has('necessidade_id') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-idade">{{ __('Necessidade') }}</label>
+                                                    <select name="necessidade_id" id="input-necessidade" class="form-control{{ $errors->has('necessidade_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Necessidade') }}" required>
+                                                        <option value="">-</option>
+                                                        @foreach ($necessidades as $nec)
+                                                            <option value="{{ $nec->id }}" {{ $nec->id == old('necessidade_id',$atendimento->necessidade_id) ? 'selected' : '' }}>{{ $nec->descricao }}</option>
+                                                        @endforeach
 
-                                            </select>
-                                            @include('alerts.feedback', ['field' => 'idade'])
-                                        </div>
+                                                    </select>
+                                                    @include('alerts.feedback', ['field' => 'idade'])
+                                                </div>
 
-                                    </div>
-                                            <div class="col-lg-3 col-sm-12">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('atuacao_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-atuacao">{{ __('Atuação') }}</label>
                                                     <select name="atuacao_id" id="input-atuacao" class="form-control{{ $errors->has('atuacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Atuação') }}" required>
@@ -165,8 +156,8 @@
                                             </div>
 
                                         </div>
-                                <div class="row">
-                                            <div class="col">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-situacao">{{ __('Situação') }}</label>
                                                     <select name="situacao_id" id="input-situacao" class="form-control{{ $errors->has('situacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Situação') }}" disabled>
@@ -178,7 +169,7 @@
                                                     @include('alerts.feedback', ['field' => 'idade'])
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('user_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-user_id">{{ __('Advogado') }}</label>
                                                     <select name="user_id" id="input-user_id" class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Advogado') }}" required>
@@ -190,7 +181,7 @@
                                                     @include('alerts.feedback', ['field' => 'idade'])
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('dataagendamento') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-user_id">{{ __('Data da Consulta') }}</label>
 
@@ -205,7 +196,7 @@
                                             </div>
 
                                         </div>
-                                <div class="row">
+                                        <div class="row">
                                             <div class="col">
                                                 <div class="form-group{{ $errors->has('cidade_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-cidade">{{ __('Cidade') }}</label>
@@ -222,13 +213,13 @@
 
 
                                         </div>
-                                <div class="row">
+                                        <div class="row">
                                             <div class="col text-center">
                                                 <button type="submit" class="btn btn-success  btn-lg">{{ __('Salvar') }}</button>
 
                                             </div>
                                         </div>
-                            </form>
+                                    </form>
                     </div>
                 </div>
             </div>
