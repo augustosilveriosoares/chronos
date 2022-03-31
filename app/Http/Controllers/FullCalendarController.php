@@ -47,6 +47,30 @@ class FullCalendarController extends Controller
         return response()->json($events);
     }
 
+    public function show(int $id)
+    {
+        $events = [];
+        $atendimentos = Atendimento::where('user_id',$id)->get();
+        foreach ($atendimentos as $eve){
+            if(!is_null($eve->getDataAgendamento())){
+                if($eve->situacao->descricao != 'Cencelado'){
+                    $event = new Event();
+                    $event->atendimento_id = $eve->id;
+                    $event->title = $eve->nome;
+                    $event->description = $eve->necessidade->descriacao;
+                    $event->allDay = false;
+                    $event->start = $eve->dataagendamento;
+                    $event->user_id = $eve->user_id;
+                    $event->color = $eve->user->color;
+                    array_push($events,$event);
+
+                }
+            }
+        }
+
+
+        return response()->json($events);
+    }
 
     public function create(Request $request)
     {
