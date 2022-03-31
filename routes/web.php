@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('item', 'ItemController', ['except' => ['show']]);
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::resource('fullcalendar', 'FullCalendarController', ['except' => ['show']]);
+    Route::resource('fullcalendar', 'FullCalendarController');
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
