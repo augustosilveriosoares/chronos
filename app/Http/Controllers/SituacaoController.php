@@ -12,9 +12,9 @@ class SituacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Situacao $model)
     {
-        //
+        return view('situacao.index', ['situacoes' => $model->all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class SituacaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('situacao.show');
     }
 
     /**
@@ -33,21 +33,13 @@ class SituacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Situacao $model)
     {
-        //
+        $model->create($request->all());
+
+        return redirect()->route('situacao.index')->withStatus(__('Situação Criada'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Situacao  $situacao
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Situacao $situacao)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +49,7 @@ class SituacaoController extends Controller
      */
     public function edit(Situacao $situacao)
     {
-        //
+        return view('situacao.show', compact('situacao'));
     }
 
     /**
@@ -69,7 +61,9 @@ class SituacaoController extends Controller
      */
     public function update(Request $request, Situacao $situacao)
     {
-        //
+        $situacao->update($request->all());
+
+        return redirect()->route('situacao.index')->withStatus(__('Situação Atualizada.'));
     }
 
     /**
@@ -80,6 +74,12 @@ class SituacaoController extends Controller
      */
     public function destroy(Situacao $situacao)
     {
-        //
+
+    }
+
+    public function show(Situacao $situacao ){
+        return view('situacao.show',['situacao' => $situacao]);
+
+
     }
 }

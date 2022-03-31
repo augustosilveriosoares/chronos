@@ -169,7 +169,7 @@
                                             <div class="col">
                                                 <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-situacao">{{ __('Situação') }}</label>
-                                                    <select name="situacao_id" id="input-situacao" class="form-control{{ $errors->has('situacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Situação') }}" required>
+                                                    <select name="situacao_id" id="input-situacao" class="form-control{{ $errors->has('situacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Situação') }}" disabled>
                                                         @foreach ($situacoes as $sit)
                                                             <option value="{{ $sit->id }}" {{ $sit->id == old('situacao_id',$atendimento->situacao_id) ? 'selected' : '' }}>{{ $sit->descricao }}</option>
                                                         @endforeach

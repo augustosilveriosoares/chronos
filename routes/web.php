@@ -23,7 +23,9 @@ Route::get('lock', 'PageController@lock')->name('page.lock');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
     Route::resource('atendimentos', 'AtendimentoController');
+    Route::resource('situacao', 'SituacaoController');
     Route::get('showByCalendar', ['as' => 'showByCalendar', 'uses' => 'AtendimentoController@showByCalendar']);
+    Route::get('showByCalendar', ['as' => 'showByCalendarEvent', 'uses' => 'AtendimentoController@showByCalendarEvent']);
     Route::resource('agendamento', 'EventController');
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
     Route::resource('observacao', 'ObservacaoAtendimentoController');
@@ -42,5 +44,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('google.destroy')->delete('google/{googleAccount}', 'GoogleAccountController@destroy');
 
 });
+
 
 

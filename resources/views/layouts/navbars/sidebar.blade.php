@@ -41,8 +41,8 @@
                         </a>
                     </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <li class="nav-item active collapsed">
+                        <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                             <i class="fab fa-laravel" style="color: #f4645f;"></i>
                             <span class="nav-link-text" style="color: #f4645f;">{{ __('Configurações') }}</span>
                         </a>
@@ -62,8 +62,8 @@
                                     </li>
                                 @endcan
                                 @can('manage-items', App\User::class)
-                                    <li class="nav-item {{ $elementName == 'category-management' ? 'active' : '' }}">
-                                        <a href="{{ route('category.index') }}" class="nav-link">{{ __('Categorias') }}</a>
+                                    <li class="nav-item {{ $elementName == 'situacao-management' ? 'active' : '' }}">
+                                        <a href="{{ route('situacao.index') }}" class="nav-link">{{ __('Situações') }}</a>
                                     </li>
                                 @endcan
                                 @can('manage-items', App\User::class)

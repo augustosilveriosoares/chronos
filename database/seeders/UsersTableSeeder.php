@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'augusto@augusto',
             'password' => Hash::make('augusto123'),
             'role_id' => 1,
-            'picture' => '../argon/img/theme/team-3.jpg',
+            'picture' => 'profile_user/6UdmP9p2fSio8dhVJL48usSYvKL7uLOCHmoZrr9D.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#b0ffff'
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'lucas@fkprevidencia.adv.br',
             'password' => Hash::make('lucas123'),
             'role_id' => 2,
-            'picture' => '../argon/img/theme/team-4.jpg',
+            'picture' => 'profile_user/H6M3e7ZBpcfRjBNWPjGOfEqcX0v2ckDQLXXmD964.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#6b6b6b'
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'gilvan@fkprevidencia.adv.br',
             'password' => Hash::make('gilvan123'),
             'role_id' => 2,
-            'picture' => '../argon/img/theme/team-5.jpg',
+            'picture' => 'profile_user/ZSyUEfbZOpL5cqfr87UO2heFtj6nVOs32I83xb6B.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#b1ffb7'
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'anacarla@fkprevidencia.adv.br',
             'password' => Hash::make('ana123'),
             'role_id' => 2,
-            'picture' => '../argon/img/theme/team-5.jpg',
+            'picture' => 'profile_user/b7uosQuX8oY8CJIFvPeYtJFinIoeW6xyFEOjeXSM.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#7b81fd'
@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'gessica@fkprevidencia.adv.br',
             'password' => Hash::make('gessica123'),
             'role_id' => 2,
-            'picture' => '../argon/img/theme/team-5.jpg',
+            'picture' => 'profile_user/JsndwKCE9byFoIbe1x9p9bHP6SlUWQZI9A5cGW2u.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#d47bfd'
@@ -74,9 +74,9 @@ class UsersTableSeeder extends Seeder
             'id' => 6,
             'name' => 'Isadora DallAgnol',
             'email' => 'isadora@fkprevidencia.adv.br',
-            'password' => Hash::make('gessica123'),
+            'password' => Hash::make('isadora123'),
             'role_id' => 2,
-            'picture' => '../argon/img/theme/team-5.jpg',
+            'picture' => 'profile_user/hPgkAa5m1KThapf0LdWPaekcWj2TxFSy8WV8YEpp.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#fd5eb0'

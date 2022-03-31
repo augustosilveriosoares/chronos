@@ -187,7 +187,7 @@
 
                             //console.log(event);
 
-                            let url = "{{ route('showByCalendar',' atendimento_id => :p') }}";
+                            let url = "{{ route('showByCalendarEvent',' atendimento_id => :p') }}";
                             url = url.replace(':p',event.atendimento_id );
                             document.location.href=url;
 

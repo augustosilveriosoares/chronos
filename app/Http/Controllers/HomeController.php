@@ -38,12 +38,13 @@ class HomeController extends Controller
         }
 
         $dashboard = new Dashboard();
+
         $dashboard->total = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','!=','Cancelado')->whereNotNull('a.dataagendamento')->count();
-        $dashboard->totalagendado = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-        $dashboard->totalconcluido = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Concluído')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-        $dashboard->totalprocesso = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Em Processo')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
         $dashboard->totalpendente = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Pendente')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
         $dashboard->totalpendente = $dashboard->totalpendente + DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Pendente')->whereNull(\DB::raw('a.dataagendamento'))->count();
+        $dashboard->totalagendado = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+        $dashboard->totalpasta = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Pasta')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+
 
 
         $dashadv = array();

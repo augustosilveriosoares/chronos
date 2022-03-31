@@ -5,10 +5,10 @@
 ])
 
 @section('content')
-    @component('layouts.headers.auth') 
+    @component('layouts.headers.auth')
         @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Examples') }} 
+            @slot('title')
+                {{ __('Examples') }}
             @endslot
 
             <li class="breadcrumb-item"><a href="{{ route('category.index') }}">{{ __('Category Management') }}</a></li>
@@ -35,7 +35,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="col-12 mt-2">
                         @include('alerts.success')
                         @include('alerts.errors')
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-            
+
         @include('layouts.footers.auth')
     </div>
 @endsection

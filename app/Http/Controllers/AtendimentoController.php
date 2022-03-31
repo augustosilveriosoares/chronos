@@ -57,7 +57,6 @@ class AtendimentoController extends Controller
 
         if($atendimento->situacao->descricao == 'Pendente'){
             if($request->filled('dataagendamento')){
-                
                 $situacao =  Situacao::where('descricao','=','Agendado')->first();
                 $atendimento->situacao_id = $situacao->id;
             }
@@ -190,6 +189,23 @@ class AtendimentoController extends Controller
         }
 
 
+    }
+    public function showByCalendarEvent(Request $request, Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade ){
+
+        $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
+        $id = $request->input('atendimento_id_');
+        $id = str_replace('> ','',$id);
+        $atendimento = Atendimento::find($id);
+
+        return view('atendimentos.edit',[
+            'atendimento' => $atendimento,
+            'sexos' => $sexo->all(),
+            'necessidades' => $necessidade->all(),
+            'atuacoes' => $atuacao->all(),
+            'situacoes' => $situacoes->all(),
+            'advogados' => $advogado,
+            'cidades' => $cidade->all(),
+        ]);
     }
 
 }
