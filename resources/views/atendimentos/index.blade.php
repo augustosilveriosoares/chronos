@@ -27,6 +27,7 @@
                                     <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Advogado</h6>
                                         <select name="user_id" id="input-user" class="form-control-sm" placeholder="{{ __('Advogado') }}"  style="width: 100% !important">
+                                            <option value="0">Todos</option>
                                             @foreach ($advogados as $adv)
                                                 <option value="{{ $adv->id }}">{{ $adv->name }}</option>
                                             @endforeach
@@ -41,7 +42,9 @@
 
                                     <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Situação</h6>
+
                                         <select name="situacao_id" id="input-situacao" class="form-control-sm" placeholder="{{ __('Situação') }}" style="width: 100% !important" >
+                                            <option value="0">Todos</option>
                                             @foreach ($situacoes as $sit)
                                                 <option value="{{ $sit->id }}">{{ $sit->descricao }}</option>
                                             @endforeach
@@ -55,8 +58,9 @@
                                     <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Cidade</h6>
                                         <select name="cidadeid" id="input-cidade" class="form-control-sm" placeholder="{{ __('Cidade') }}"  style="width: 100% !important">
-                                            @foreach ($situacoes as $sit)
-                                                <option value="{{ $sit->id }}">{{ $sit->descricao }}</option>
+                                            <option value="0">Todos</option>
+                                            @foreach ($cidades as $sit)
+                                                <option value="{{ $sit->id }}">{{ $sit->nome }}</option>
                                             @endforeach
 
                                         </select>
@@ -82,14 +86,14 @@
                                 </div>
 
 
-                                <div class="col">
+                                <div class="col text-right">
 
-                                    <a href="!#">
+                                    <a >
                                         <button type="button" class="btn-primary  btn-icon-only mt-3">
                                             <span class="btn-inner--icon"><i class="fas fa-search"></i></span>
                                         </button>
                                     </a>
-                                    <a href="!#">
+                                    <a >
                                         <button type="button" class="btn-primary  btn-icon-only mt-3">
                                             <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                         </button>
