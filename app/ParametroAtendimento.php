@@ -9,5 +9,5 @@ class ParametroAtendimento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tempoatendimento'];
+    protected $fillable = ['tempo'];
 }

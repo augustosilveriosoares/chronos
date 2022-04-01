@@ -89,8 +89,20 @@ class ParametroAtendimentoController extends Controller
     {
 
 
-        $parametroAtendimento->update($request->all());
-        return redirect();
+
+
+        $parametroAtendimento = ParametroAtendimento::find($request->input('id'));
+        $parametroAtendimento->tempo = $request->input('tempo');
+        $parametroAtendimento->save();
+
+
+        return view('parametro.show',[
+            'parametro' => $parametroAtendimento
+
+
+
+
+        ]);
     }
 
     /**

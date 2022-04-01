@@ -11,8 +11,8 @@
                 {{ __('Examples') }}
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Gerenciamento de Situação') }}</a></li>
-            
+
+
         @endcomponent
     @endcomponent
 
@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Situações') }}</h3>
+                                <h3 class="mb-0">{{ __('Parametros de Atendimento') }}</h3>
                             </div>
                             <div class="col-4 text-right">
 
@@ -31,21 +31,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if($parametro->id)
+
                             <form method="post" action="{{ route('parametro.update', $parametro) }}" autocomplete="off">
                                 @method('put')
-                        @else
-                            <form method="post" action="{{ route('parametro.store', $parametro) }}" autocomplete="off">
-                        @endif
                         @csrf
 
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('Situação') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Atendimento') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
-                                    <input type="hidden" value="{{$parametro->id ??''}}">
-                                    <label class="form-control-label" for="input-tempo">{{ __('Tempo') }}</label>
-                                    <input type="text" name="tempo" id="input-tempo" class="form-control{{ $errors->has('tempo') ? ' is-invalid' : '' }}" placeholder="{{ __('Tempo') }}" value="{{ old('tempo', $parametro->tempo ??'') }}" required autofocus>
+                                    <input type="hidden" name="id"value="{{$parametro->id ??''}}">
+                                    <label class="form-control-label" for="input-tempo">{{ __('Tempo de Atendimento (min)') }}</label>
+                                    <input type="text" name="tempo" id="tempo" class="form-control{{ $errors->has('tempo') ? ' is-invalid' : '' }}" placeholder="{{ __('Tempo') }}" value="{{ $parametro->tempo ??'' }}" required autofocus>
 
                                     @include('alerts.feedback', ['field' => 'tempo'])
                                 </div>
