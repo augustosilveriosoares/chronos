@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Cidade;
+use App\ParametroAtendimento;
 use App\TipoAtendimento;
 use Illuminate\Database\Seeder;
 use DB;
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventsSeeder::class);
         $this->call(CidadeSeeder::class);
         $this->call(TipoAtendimentoSeeder::class);
+        $this->call(ParametroAtendimentoSeeder::class);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

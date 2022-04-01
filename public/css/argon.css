@@ -21339,7 +21339,7 @@ table.dataTable tbody > tr.selected {
 
 .fc-event .fc-time {
   float: left;
-  background: rgb(30, 30, 30);
+  background: rgb(0, 0, 0);
   padding: 2px 6px;
   margin: 0 0 0 -1px;
 }

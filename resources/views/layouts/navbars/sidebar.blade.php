@@ -67,6 +67,11 @@
                                     </li>
                                 @endcan
                                 @can('manage-items', App\User::class)
+                                    <li class="nav-item {{ $elementName == 'parametro-management' ? 'active' : '' }}">
+                                        <a href="{{ route('parametro.index') }}" class="nav-link">{{ __('Parametros') }}</a>
+                                    </li>
+                                @endcan
+                                @can('manage-items', App\User::class)
                                     <li class="nav-item {{ $elementName == 'tag-management' ? 'active' : '' }}">
                                         <a href="{{ route('tag.index') }}" class="nav-link">{{ __('Tags') }}</a>
                                     </li>

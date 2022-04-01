@@ -13,6 +13,7 @@
 
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
 Route::post('zap','AtendimentoController@zap')->name('zap');
+
 Auth::routes();
 
 Route::get('dashboard', 'HomeController@index')->name('home');
@@ -24,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
     Route::resource('atendimentos', 'AtendimentoController');
     Route::resource('situacao', 'SituacaoController');
+
+    Route::resource('parametro', 'ParametroAtendimentoController');
+
     Route::get('showByCalendar', ['as' => 'showByCalendar', 'uses' => 'AtendimentoController@showByCalendar']);
     Route::get('showByCalendar', ['as' => 'showByCalendarEvent', 'uses' => 'AtendimentoController@showByCalendarEvent']);
     Route::resource('agendamento', 'EventController');
