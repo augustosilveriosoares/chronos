@@ -46,22 +46,21 @@
                         <div class="card-body">
                             <!-- List group -->
                             <ul class="list-group list-group-flush list my--3">
-                            
+                                <form id="frmFiltro">
                                 @foreach($advogados as $adv)
                                
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col ml--2">
-                                            <div class="custom-control custom-radio mb-3">
-                                                <input name="radio_adv" class="custom-control-input radio_adv" 
-                                                id="customRadio{{$adv->id}}" type="radio" value="{{$adv->id}}">
-                                                <label class="custom-control-label" for="customRadio{{$adv->id}}">{{$adv->name}}</label>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="customCheck" class="custom-control-input" id="customCheck{{$adv->name}}" value="{{$adv->id}}">
+                                                <label class="custom-control-label" for="customCheck{{$adv->name}}">{{$adv->name}}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 @endforeach
-                            
+                                </form>
                             </ul>
                         </div>
                     </div>
@@ -221,17 +220,41 @@
     })();
 
 
-    $('input[type=radio][name=radio_adv]').change(function() {
-        id = this.value;
+    var $ids = [];
+   
+    $('#frmFiltro input[type=checkbox]').change(function() {
+        setNewUrlCalendar();
+    });
+
+
+    function setNewUrlCalendar(){
+        
+        $ids = getChecklistItems();
+
         let url = "{{ route('fullcalendar.show',':p') }}";
-        url = url.replace(':p', id);
-        events = {url: url};
+        url = url.replace(':p', $ids);
+        var events = {url: url};
         console.log(url);
-        console.log(id);
         $('#calendar').fullCalendar('removeEvents');
         $('#calendar').fullCalendar('addEventSource', events);         
         $('#calendar').fullCalendar('rerenderEvents');
-    });
+
+    }
+
+    function getChecklistItems() {
+        
+        var result = $("#frmFiltro input:checkbox[name=customCheck]:checked").get();
+        console.log(result);
+        var $data = $.map(result, function(element) {
+            console.log("element",$(element).val())
+            console.log("checado?",element.checked);
+            if(element.checked){
+                return $(element).val();    
+            }
+            
+        });
+        return $data;
+    }
 
 
 </script>

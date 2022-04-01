@@ -47,10 +47,11 @@ class FullCalendarController extends Controller
         return response()->json($events);
     }
 
-    public function show(int $id)
+    public function show($id)
     {
+        $ids = explode(',',$id);
         $events = [];
-        $atendimentos = Atendimento::where('user_id',$id)->get();
+        $atendimentos = Atendimento::whereIn('user_id',$ids)->get();
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
                 if($eve->situacao->descricao != 'Cencelado'){
