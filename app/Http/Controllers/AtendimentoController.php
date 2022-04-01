@@ -44,8 +44,7 @@ class AtendimentoController extends Controller
 
     }
 
-    public function create(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade){
-
+    public function create(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade, TipoAtendimento $tipoatendimento){
         $atendimento = new Atendimento();
         $atendimento->datacadastro = now();
         $atendimento->dataagendamento = '';
@@ -58,6 +57,7 @@ class AtendimentoController extends Controller
             'situacoes' => $situacoes->all(),
             'advogados' => $advogado,
             'cidades' => $cidade->all(),
+            'tipoatendimento' => $tipoatendimento->all()
         ]);
     }
 
