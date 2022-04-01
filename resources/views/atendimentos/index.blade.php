@@ -72,6 +72,7 @@
                                         <h6 class="small text-gray">Data Inicial</h6>
                                         <input type="date" name="dataincial" value="{{ date('Y-m-d', strtotime($datainicial)) ?? '' }}" class="form-control-sm"   style="width: 100% !important">
 
+
                                     </div>
 
                                 </div>
@@ -107,84 +108,7 @@
                 </div>
             </div>
         </div>
-{{--        <div class="row">--}}
-{{--            <div class="col-12">--}}
-{{--                <div class="card">--}}
 
-{{--                    <div class="card-body">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-lg-2">--}}
-
-{{--                                <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">--}}
-{{--                                    <h6 class="text-gray small">Advogado</h6>--}}
-{{--                                    <select name="user_id" id="input-user" class="form-control-sm" placeholder="{{ __('Advogado') }}" >--}}
-{{--                                        @foreach ($advogados as $adv)--}}
-{{--                                            <option value="{{ $adv->id }}">{{ $adv->name }}</option>--}}
-{{--                                        @endforeach--}}
-
-{{--                                    </select>--}}
-{{--                                    @include('alerts.feedback', ['field' => 'idade'])--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-2">--}}
-
-{{--                                <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">--}}
-{{--                                    <h6 class="text-gray small">Situação</h6>--}}
-{{--                                    <select name="situacao_id" id="input-situacao" class="form-control-sm" placeholder="{{ __('Situação') }}" >--}}
-{{--                                        @foreach ($situacoes as $sit)--}}
-{{--                                            <option value="{{ $sit->id }}">{{ $sit->descricao }}</option>--}}
-{{--                                        @endforeach--}}
-
-{{--                                    </select>--}}
-{{--                                    @include('alerts.feedback', ['field' => 'idade'])--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-2">--}}
-
-{{--                                <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">--}}
-{{--                                    <h6 class="text-gray small">Cidade</h6>--}}
-{{--                                    <select name="cidadeid" id="input-cidade" class="form-control-sm" placeholder="{{ __('Cidade') }}" >--}}
-{{--                                        @foreach ($situacoes as $sit)--}}
-{{--                                            <option value="{{ $sit->id }}">{{ $sit->descricao }}</option>--}}
-{{--                                        @endforeach--}}
-
-{{--                                    </select>--}}
-{{--                                    @include('alerts.feedback', ['field' => 'idade'])--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-2 col-sm-12">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <h6 class="small text-gray">Data Inicial</h6>--}}
-{{--                                    <input type="date" name="dataincial" value="{{ date('Y-m-d', strtotime($datainicial)) ?? '' }}" class="form-control-sm"  autofocus>--}}
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-{{--                            <div class="col-lg-2 col-sm-12">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <h6 class="small text-gray">Data Final</h6>--}}
-{{--                                    <input type="date" name="datafinal"  value="{{ date('Y-m-d', strtotime($datafinal)) ?? '' }}" class="form-control-sm"  autofocus>--}}
-
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-
-
-{{--                            <div class="col-lg-2">--}}
-{{--                                <div class="form-group mt-3">--}}
-{{--                                    <button type="submit" class="btn btn-success  btn-xl mt-3" style="width: 100% !important;" >{{ __('Filtrar') }}</button>--}}
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
         <div class="row">
 
 
