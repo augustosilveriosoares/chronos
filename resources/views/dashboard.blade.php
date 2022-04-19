@@ -138,6 +138,9 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+
+
     <script src="{{ asset('argon') }}/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -198,8 +201,8 @@
                         global: {
                             responsive: true,
                             maintainAspectRatio: false,
-                            defaultColor: (mode == 'dark') ? colors.gray[700] : colors.gray[600],
-                            defaultFontColor: (mode == 'dark') ? colors.gray[700] : colors.gray[600],
+                            defaultColor: (mode == 'dark') ? colors.gray[700] : colors.gray[100],
+                            defaultFontColor: (mode == 'dark') ? colors.gray[700] : colors.gray[100],
                             defaultFontFamily: fonts.base,
                             defaultFontSize: 13,
                             layout: {
@@ -612,6 +615,18 @@
                             backgroundColor: atendimentoTipoColor,
                             label: 'Tipo'
                         }],
+                    },
+                    plugins: {
+                        labels: {
+                            render: 'percentage',
+                            fontColor: function (data) {
+                                var rgb = hexToRgb(data.dataset.backgroundColor[data.index]);
+                                var threshold = 140;
+                                var luminance = 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
+                                return luminance > threshold ? 'black' : 'white';
+                            },
+                            precision: 2
+                        }
                     },
                     options: {
                         responsive: true,

@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call( NecessidadeSeeder::Class);
         $this->call(SituacaoSeeder::class);
         $this->call(SexoSeeder::class);
-        $this->call(NecessidadeSeeder::class);
-        $this->call(AtuacaoSeeder::class);
+                $this->call(AtuacaoSeeder::class);
         $this->call(AtendimentoSeeder::class);
         $this->call(EventsSeeder::class);
         $this->call(CidadeSeeder::class);

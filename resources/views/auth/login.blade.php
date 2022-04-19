@@ -3,18 +3,14 @@
 @section('content')
     @include('layouts.headers.guest', ['infoLogin' => 1])
 
-    <div class="container mt--8 pb-5">
+    <div class="container mt--8 pb-5 " >
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
+                 <div class="card bg-secondary shadow border-0">
+                    <div class="card-body pr-5 pl-5 ">
                         <div class="text-muted text-center mt-6 mb-3"><small>{{ __('Faça login para continuar: ') }}</small></div>
-
-                    </div>
-                    <div class="card-body px-lg-5 py-lg-5">
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
-
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -54,18 +50,10 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-light">
-                                <small>{{ __('Forgot password?') }}</small>
-                            </a>
-                        @endif
-                    </div>
-                    <div class="col-6 text-right">
-                        <a href="{{ route('register') }}" class="text-light">
-                            <small>{{ __('Create new account') }}</small>
-                        </a>
-                    </div>
+
+
+
+
                 </div>
             </div>
         </div>

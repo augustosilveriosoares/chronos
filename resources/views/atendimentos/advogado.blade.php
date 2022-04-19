@@ -73,11 +73,13 @@
                         </div>
                     </div>
                     <div class="card-body bg-secondary">
-
+                        <form method="post" action="{{route('updateByAdvogado',$atendimento)}}" autocomplete="off">
+                            @csrf
+                            @method('put')
                         <div class="row">
                             <div class="col">
-
                                 <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
+                                    <input type="hidden" name="id" value="{{$atendimento->id}}">
                                     <label class="form-control-label" for="input-situacao">{{ __('Situação') }}</label>
                                     <select name="situacao_id" id="input-situacao" class="form-control{{ $errors->has('situacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Situação') }}" >
                                         @foreach ($situacoes as $sit)
@@ -87,20 +89,27 @@
                                     </select>
                                     @include('alerts.feedback', ['field' => 'idade'])
                                 </div>
-
                             </div>
                             <div class="col-lg-4 mt-lg-4 ">
                                 <div class="col text-center">
                                     <button type="submit" class="btn btn-warning btn-lg btn-block">{{ __('Salvar') }}</button>
-
                                 </div>
                             </div>
 
                         </div>
+                        </form>
+
+
                     </div>
                 </div>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-12 mt-2">
+                @include('alerts.success')
+                @include('alerts.errors')
+            </div>
         </div>
         <div class="row">
             <div class="col-xl-12 order-xl-1">

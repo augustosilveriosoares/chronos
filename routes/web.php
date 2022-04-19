@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('showByCalendar', ['as' => 'showByCalendar', 'uses' => 'AtendimentoController@showByCalendar']);
     Route::get('showByCalendar', ['as' => 'showByCalendarEvent', 'uses' => 'AtendimentoController@showByCalendarEvent']);
+    Route::put('updateByAdvogado', ['as' => 'updateByAdvogado', 'uses' => 'AtendimentoController@updateByAdvogado']);
+
     Route::resource('agendamento', 'EventController');
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
     Route::resource('observacao', 'ObservacaoAtendimentoController');

@@ -40,7 +40,7 @@
                             <span class="nav-link-text">{{ __('Agenda') }}</span>
                         </a>
                     </li>
-
+                    @if(auth()->user()->isAdmin())
                     <li class="nav-item active collapsed">
                         <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                             <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -88,6 +88,7 @@
                             </ul>
                         </div>
                     </li>
+                        @endif
 
 
                 </ul>

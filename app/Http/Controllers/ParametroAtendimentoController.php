@@ -87,15 +87,9 @@ class ParametroAtendimentoController extends Controller
      */
     public function update(Request $request, ParametroAtendimento $parametroAtendimento)
     {
-
-
-
-
         $parametroAtendimento = ParametroAtendimento::find($request->input('id'));
         $parametroAtendimento->tempo = $request->input('tempo');
         $parametroAtendimento->save();
-
-
         return view('parametro.show',[
             'parametro' => $parametroAtendimento
 

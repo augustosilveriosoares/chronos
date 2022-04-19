@@ -10,11 +10,12 @@ class Dashboard extends Model
     use HasFactory;
     protected $fillable = [
         'total',
-        'totalagendado',
-        'totalconcluido',
-        'totalprocesso',
-        'totalpendente'
-
+        'agendado',
+        'analise',
+        'futuro',
+        'infrutifero',
+        'pendente',
+        'processo'
     ];
 
 }

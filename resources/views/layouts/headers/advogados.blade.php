@@ -1,15 +1,16 @@
 
 @php $i = 0; $y =1 ;$maxcolumn = 4; $size = count($dashboardadv); @endphp
-<div class="row">
+<div class="row accordion" id="accordionExample">
+
 @foreach($dashboardadv as $adv)
 
     <div class="col-lg-3 col-md -4 col-sm-12 mt-7">
                 <div class="card">
-                    <div class="row justify-content-center mb-6">
+                    <div class="row justify-content-center mb-3">
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
 
-                                    <img src="{{$adv->picture}}" class="rounded-circle">
+                                    <img src="{{$adv->picture ??''}}" class=" avatar  rounded-circle">
 
                             </div>
                         </div>
@@ -22,10 +23,11 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalagendado?? '0'}}</strong> Agendados</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalconcluido?? '0'}}</strong> Concluídos</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->total?? '0'}}</strong> Agendados</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->agendado?? '0'}}</strong> Análise</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Futuro</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Infrutifero</h4></li>
                         <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Processos</h4></li>
-
                     </ul>
                 </div>
     </div>

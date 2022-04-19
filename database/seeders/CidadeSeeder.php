@@ -16,32 +16,32 @@ class CidadeSeeder extends Seeder
     {
         DB::table('cidades')->insert([
             'id' => 1,
-            'nome' => 'Pato Branco',
-
-        ]);
-        DB::table('cidades')->insert([
-            'id' => 2,
             'nome' => 'Curitiba',
 
         ]);
         DB::table('cidades')->insert([
-            'id' => 3,
-            'nome' => 'Palmas',
+            'id' => 2,
+            'nome' => 'Pato Branco',
 
         ]);
         DB::table('cidades')->insert([
-            'id' => 4,
+            'id' => 3,
             'nome' => 'Clevelândia',
 
         ]);
         DB::table('cidades')->insert([
+            'id' => 4,
+            'nome' => 'Palmas',
+
+        ]);
+        DB::table('cidades')->insert([
             'id' => 5,
-            'nome' => 'Coronel Vivida',
+            'nome' => 'Mangueirinha',
 
         ]);
         DB::table('cidades')->insert([
             'id' => 6,
-            'nome' => 'Mangueirinha',
+            'nome' => 'Coronel Vivida',
 
         ]);
 

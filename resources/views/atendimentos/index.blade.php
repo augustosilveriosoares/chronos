@@ -20,89 +20,62 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-
-                            <div class="row">
-                                <div class="col">
-
+                        <form action="{{ route('atendimentos.index', [$cidadeid,$userid,$situacaoid]) }}" method="get" >
+                            @csrf
+                        <div class="row">
+                                <div class=" col-sm-12 col-lg">
                                     <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Advogado</h6>
-                                        <select name="user_id" id="input-user" class="form-control-sm" placeholder="{{ __('Advogado') }}"  style="width: 100% !important">
-                                            <option value="0">Todos</option>
+                                        <select name="userid" id="input-user" class="form-control-sm" placeholder="{{ __('Advogado') }}"  style="width: 100% !important">
+                                            <option value="0" selected>Todos</option>
                                             @foreach ($advogados as $adv)
-                                                <option value="{{ $adv->id }}">{{ $adv->name }}</option>
+
+                                                <option value="{{ $adv->id }}" {{ $adv->id == old('userid',$userid) ? 'selected' : '' }}>{{ $adv->name }}</option>
                                             @endforeach
 
                                         </select>
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
-
                                 </div>
-                                <div class="col">
-
-
+                                <div class="col-sm-12 col-lg">
                                     <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Situação</h6>
 
-                                        <select name="situacao_id" id="input-situacao" class="form-control-sm" placeholder="{{ __('Situação') }}" style="width: 100% !important" >
+                                        <select name="situacaoid" id="input-situacao" class="form-control-sm" placeholder="{{ __('Situação') }}" style="width: 100% !important" >
                                             <option value="0">Todos</option>
                                             @foreach ($situacoes as $sit)
-                                                <option value="{{ $sit->id }}">{{ $sit->descricao }}</option>
+
+                                                <option value="{{ $sit->id }}" {{ $sit->id == old('situacaoid',$situacaoid) ? 'selected' : '' }}>{{ $sit->descricao }}</option>
                                             @endforeach
 
                                         </select>
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
                                 </div>
-                                <div class="col">
-
+                                <div class="col-sm-12 col-lg">
                                     <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Cidade</h6>
                                         <select name="cidadeid" id="input-cidade" class="form-control-sm" placeholder="{{ __('Cidade') }}"  style="width: 100% !important">
                                             <option value="0">Todos</option>
                                             @foreach ($cidades as $sit)
-                                                <option value="{{ $sit->id }}">{{ $sit->nome }}</option>
+
+                                                <option value="{{ $sit->id }}" {{ $sit->id == old('cidadeid',$cidadeid) ? 'selected' : '' }}>{{ $sit->nome }}</option>
                                             @endforeach
 
                                         </select>
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <h6 class="small text-gray">Data Inicial</h6>
-                                        <input type="date" name="dataincial" value="{{ date('Y-m-d', strtotime($datainicial)) ?? '' }}" class="form-control-sm"   style="width: 100% !important">
-
-
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <h6 class="small text-gray">Data Final</h6>
-                                        <input type="date" name="datafinal"  value="{{ date('Y-m-d', strtotime($datafinal)) ?? '' }}" class="form-control-sm"  autofocus  style="width: 100% !important">
-
-
-                                    </div>
-
+                                <div class="col-sm-12 col-lg-1 text-center">
+                                    <button type="submit" class="btn btn-lg btn-block btn-outline mt-3 mr-3" >
+                                        <span class="btn-inner--icon">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </button>
                                 </div>
 
-
-                                <div class="col text-right">
-
-                                    <a >
-                                        <button type="button" class="btn-primary  btn-icon-only mt-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-search"></i></span>
-                                        </button>
-                                    </a>
-                                    <a >
-                                        <button type="button" class="btn-primary  btn-icon-only mt-3">
-                                            <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                        </button>
-                                    </a>
-
-
-                                </div>
                             </div>
+                        </form>
 
                     </div>
                 </div>
@@ -194,10 +167,6 @@
                                             @method('delete')
                                             <button type="button" class="btn  btn-icon-only"  onclick="confirm('{{ __("Confirma a exclusão?") }}') ? this.parentElement.submit() : ''">
                                                 <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-
-
-
-
                                             </button>
                                         </form>
                                     </td>

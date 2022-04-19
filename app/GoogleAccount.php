@@ -30,6 +30,7 @@ class GoogleAccount extends Model
     public function calendars()
     {
         return $this->hasMany(Calendar::class);
+        
     }
 
     public function synchronize()

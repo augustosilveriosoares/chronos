@@ -29,7 +29,6 @@
 @endslot
 @endcomponent
 @endcomponent
-
 <div class="container-fluid mt--6">
     <div class="row">
         <div class="col-lg-2">
@@ -48,7 +47,6 @@
                             <ul class="list-group list-group-flush list my--3">
                                 <form id="frmFiltro">
                                 @foreach($advogados as $adv)
-                               
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col ml--2">
@@ -65,10 +63,7 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
         <div class="col ">
             <!-- Fullcalendar -->
@@ -76,7 +71,7 @@
                 <!-- Card header -->
                 <div class="card-header">
                     <!-- Title -->
-                    <h6 class="fullcalendar-title h2 mb-0"></h6>
+                    <h6 class="fullcalendar-title h2 mb-0">Fullcalendar</h6>
                 </div>
                 <!-- Card body -->
                 <div class="card-body p-0">
@@ -85,9 +80,7 @@
             </div>
 
         </div>
-        <div class="col-lg-1">
 
-        </div>
     </div>
     <!-- Footer -->
     @include('layouts.footers.auth')
@@ -123,15 +116,19 @@
         // Init
         function init($this) {
 
+
             // Full calendar options
             // For more options read the official docs: https://fullcalendar.io/docs
 
             var options = {
+
                 header: {
                     left: 'prev,next today',
                     center: ' title ',
                     right: ' dayGridMonth,timeGridWeek,timeGridDay '
                 },
+                locale: 'pt-br',
+
                 buttonIcons: {
                     prev: 'calendar--prev',
                     next: 'calendar--next'
@@ -157,11 +154,11 @@
 
 
 
-                // viewRender: function(view) {
-                //     var calendarDate = $this.fullCalendar('getDate');
-                //     var calendarMonth = calendarDate.month();
-                //     $('.fullcalendar-title').html(view.title);
-                // },
+                viewRender: function(view) {
+                    var calendarDate = $this.fullCalendar('getDate');
+                    var calendarMonth = calendarDate.month();
+                    $('.fullcalendar-title').html(view.title);
+                },
 
                 // Edit calendar event action
 
@@ -221,14 +218,14 @@
 
 
     var $ids = [];
-   
+
     $('#frmFiltro input[type=checkbox]').change(function() {
         setNewUrlCalendar();
     });
 
 
     function setNewUrlCalendar(){
-        
+
         $ids = getChecklistItems();
 
         let url = "{{ route('fullcalendar.show',':p') }}";
@@ -236,22 +233,22 @@
         var events = {url: url};
         console.log(url);
         $('#calendar').fullCalendar('removeEvents');
-        $('#calendar').fullCalendar('addEventSource', events);         
+        $('#calendar').fullCalendar('addEventSource', events);
         $('#calendar').fullCalendar('rerenderEvents');
 
     }
 
     function getChecklistItems() {
-        
+
         var result = $("#frmFiltro input:checkbox[name=customCheck]:checked").get();
         console.log(result);
         var $data = $.map(result, function(element) {
             console.log("element",$(element).val())
             console.log("checado?",element.checked);
             if(element.checked){
-                return $(element).val();    
+                return $(element).val();
             }
-            
+
         });
         return $data;
     }

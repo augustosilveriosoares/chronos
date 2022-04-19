@@ -27,19 +27,27 @@ class SituacaoSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('situacaos')->insert([
-            'descricao' => 'Pasta',
+            'descricao' => 'Análise',
             'cor' => '#999999',
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
         DB::table('situacaos')->insert([
-            'descricao' => 'Futuro',
+        'descricao' => 'Processo',
+        'cor' => '#999999',
+        'created_at' => now(),
+        'updated_at' => now()
+        ]);
+
+        DB::table('situacaos')->insert([
+            'descricao' => 'Direito Futuro',
             'cor' => '#d2f7a2',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('situacaos')->insert([
-            'descricao' => 'Inapto',
+            'descricao' => 'Infrutifero',
             'cor' => '#ffd59a',
             'created_at' => now(),
             'updated_at' => now()

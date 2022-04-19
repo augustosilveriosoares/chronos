@@ -21335,6 +21335,7 @@ table.dataTable tbody > tr.selected {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 600;
+    background-color: black;
 }
 
 .fc-event .fc-time {
@@ -21342,6 +21343,7 @@ table.dataTable tbody > tr.selected {
   background: rgb(0, 0, 0);
   padding: 2px 6px;
   margin: 0 0 0 -1px;
+    color:white;
 }
 
 .fc-view,
