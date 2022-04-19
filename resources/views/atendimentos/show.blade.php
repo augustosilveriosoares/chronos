@@ -11,6 +11,10 @@
 
     <div class="container-fluid mt--6">
         <div class="row">
+            <div class="col-12 mt-2">
+                @include('alerts.success')
+                @include('alerts.errors')
+            </div>
             <div class="col-xl-12 order-xl-1">
                 <div class="card">
                     <div class="card-header">
@@ -35,6 +39,7 @@
                                         <div class="row">
                                             <div class="col-lg-7 col-sm-12">
                                                 <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
+                                                    <input type="hidden" name="id" value="{{$atendimento->id?? ''}}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Nome') }}</label>
                                                     <input type="text" name="nome" id="input-nome" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome') }}" value="{{ old('nome', $atendimento->nome??'') }}" required autofocus>
                                                     @include('alerts.feedback', ['field' => 'name'])

@@ -13,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Date;
 use function PHPUnit\Framework\isNull;
 
 class AtendimentoController extends Controller
@@ -97,11 +98,21 @@ class AtendimentoController extends Controller
 
         $atendimento = new Atendimento($request->all());
 
-
-
-            if($request->filled('dataagendamento')){
+        if($request->filled('dataagendamento')){
                 $situacao =  Situacao::where('descricao','=','Agendado')->first();
                 $atendimento->situacao_id = $situacao->id;
+
+                $advogadoId = $request->input('user_id');
+                $dataHora = $request->input('dataagendamento');
+                $dataHora = str_replace('T', ' ', $dataHora);
+
+
+                $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->get()->first();
+
+                if(!empty($verifica)){
+                    return redirect()->back()->withInput()->withErrors(['errors' => 'Já existe um atendimento agendado para '.$verifica->user->name.' em '. date_format(new \DateTime($verifica->dataagendamento),'d-m-y H:i').'. Cliente '.$verifica->nome.'.']);return redirect()->back()->withErrors(['errors' => 'Já existe um atendimento agendado para '.$verifica->user->name.' em '. date_format(new \DateTime($verifica->dataagendamento),'d-m-y H:i').'. Cliente '.$verifica->nome.'.']);
+                }
+
 
         }
 
@@ -167,18 +178,12 @@ class AtendimentoController extends Controller
         $advogadoId = $request->input('user_id');
         $dataHora = $request->input('dataagendamento');
         $dataHora = str_replace('T', ' ', $dataHora);
+        $atendimentoId = $request->input('id');
 
-        if($this->timeIsNotValid($advogadoId,$dataHora)){
+        $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->where('id','!=',$atendimentoId)->get()->first();
 
-
-        }else{
+        if(empty($verifica)){
             $atendimento->update($request->all());
-
-
-
-
-
-
 
             if($atendimento->situacao->descricao == 'Pendente'){
                 if($request->filled('dataagendamento')){
@@ -206,10 +211,15 @@ class AtendimentoController extends Controller
                 $atendimento->retorno = 0;
             }
             $atendimento->save();
-
             return redirect()->route('atendimentos.index')->withStatus(__('Atualizado com sucesso!'));
-
+        }else{
+            return redirect()->back()->withErrors(['errors' => 'Já existe um atendimento agendado para '.$verifica->user->name.' em '. date_format(new \DateTime($verifica->dataagendamento),'d-m-y H:i').'. Cliente '.$verifica->nome.'.']);
         }
+
+
+
+
+
 
 
 
@@ -290,49 +300,10 @@ class AtendimentoController extends Controller
 
     }
 
-    public function timeIsNotValid($advogadoId,$dataHora){
-
-
-        $atendimento = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->get()->first();
 
 
 
-        $atendimentoAnterior = $this->getAtendimentoAnterior($dataHoraAtendimento);
-        $proximoAtendimento = $this->getProximoAtendimento($dataHoraAtendimento);
 
-
-        dd('data hora atendimento anterior'.date('Y-m-d H:i',strtotime(strtotime($atendimentoAnterior->dataagendamento))));
-
-        $date = date("Y-m-d H:i",$dataHoraAtendimento);
-        dd($date);
-        $time = strtotime($date);
-        $time = $time - (15 * 60);
-        $date = date("Y-m-d H:i:s", $time);
-
-        dd($dataHoraAtendimento);
-        $timeinicial = '';
-        $timefinal = '';
-        if($request->filled('dataagendamento')){
-
-
-            $timeinicial = Carbon::createFromFormat('Y-m-d H:i', $timeinicial);
-
-            $teste = Atendimento::where('dataagendamento','<',$timeinicial)->orderBy('dataagendamento','DESC')->get()->first();
-
-            // $data =  Carbon::createFromFormat('Y-m-d H:i', strval($teste->dataagendamento));
-
-            dd($teste->dataagendamento);
-        }
-//        $validaAtendimento = DB::table('atendimentos')
-//            ->join('situacaos','situacaos.id','=','atendimentos.situacao_id')
-//            ->where('situacaos.descricao','=','Agendado')
-//            ->where('atendimentos.dataagn')
-//
-//            ->select('atendimentos.*')->get();
-
-
-
-    }
     public function getAtendimentoAnterior($data){
         $atendimentoAnterior = DB::table('atendimentos')
             ->join('situacaos','situacaos.id','=','atendimentos.situacao_id')

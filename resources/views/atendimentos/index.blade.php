@@ -118,13 +118,14 @@
                             <thead class="thead-light">
                             <tr>
 
-                                <th scope="col-3">{{ __('Nome') }}</th>
-                                <th scope="col-1">{{ __('Necessidade') }}</th>
-                                <th scope="col-1">{{ __('Situação') }}</th>
-                                <th scope="col-1">{{ __('Advogado') }}</th>
-                                <th scope="col-3">{{ __('Agendado') }}</th>
-                                <th scope="col-3">{{ __('Cidade') }}</th>
-                                <th scope="col-3">{{ __('Ação') }}</th>
+                                <th scope="col">{{ __('Cliente') }}</th>
+                                <th scope="col">{{ __('Necessidade') }}</th>
+                                <th scope="col">{{ __('Tipo') }}</th>
+                                <th scope="col">{{ __('Advogado') }}</th>
+                                <th scope="col">{{ __('Agendado') }}</th>
+                                <th scope="col">{{ __('Cidade') }}</th>
+                                <th scope="col">{{ __('Situação') }}</th>
+                                <th scope="col">{{ __('Ação') }}</th>
 
 
 
@@ -141,7 +142,10 @@
 
                                     <td> {{ $atendimento->nome ?? ''}}</td>
                                     <td>{{ $atendimento->necessidade->descricao ?? ''}}</td>
-                                    <td><span class="badge badge-default" style="background-color:{{ $atendimento->situacao->cor}}">{{ $atendimento->situacao->descricao ?? ''}}</span></td>
+
+                                    <td>
+                                        {{$atendimento->tipoatendimento->descricao ?? ''}}
+                                    </td>
                                     <td>
 
                                         {{$atendimento->user->name ?? ''}}
@@ -156,6 +160,8 @@
 
 
                                     <td>{{$atendimento->cidade->nome ?? ''}}</td>
+                                    <td><span class="badge badge-default" style="background-color:{{ $atendimento->situacao->cor}}">{{ $atendimento->situacao->descricao ?? ''}}</span></td>
+
                                     <td>
                                         <a href="{{ route('atendimentos.show', $atendimento) }}">
                                             <button type="button" class="btn  btn-icon-only">
