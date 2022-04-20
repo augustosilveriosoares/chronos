@@ -118,7 +118,7 @@
                             <thead class="thead-light">
                             <tr>
 
-                                <th scope="col">{{ __('Cliente') }}</th>
+                                <th scope="col-sm-0">{{ __('Cliente') }}</th>
                                 <th scope="col">{{ __('Necessidade') }}</th>
                                 <th scope="col">{{ __('Tipo') }}</th>
                                 <th scope="col">{{ __('Advogado') }}</th>

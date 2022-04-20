@@ -61,7 +61,10 @@ class AtendimentoController extends Controller
         if($userid >0){
             $queryA->where('user_id','=',$userid);
         }
+        $queryA->orderByDesc('created_at',);
         $atendimentos = $queryA->get();
+
+
 
 
 
@@ -239,24 +242,30 @@ class AtendimentoController extends Controller
 
             $data = $request->all();
             $dados_formatados = [
+
                 'necessidade_id' => isset($data['necessidadeid']) ? $data['necessidadeid'] : null,
-                'situacao_id' => isset($data['situacaoid']) ? $data['situacaoid'] : null,
+                'situacao_id' => 1,
+                'tipoatendimento_id' =>1,
                 'atuacao_id' => isset($data['atuacaoid']) ? $data['atuacaoid'] : null,
                 'cidade_id' => isset($data['cidadeid']) ? $data['cidadeid'] : null,
                 'nome' => isset($data['nome']) ? $data['nome'] : null,
                 'whats' => isset($data['whats']) ? $data['whats'] : null,
-                'email' => isset($data['email']) ? $data['email'] : null,
                 'idade' => isset($data['idade']) ? $data['idade'] : null,
-                'anoscontribuicao' => isset($data['anoscontribuicao']) ? $data['anoscontribuicao'] : null
+                'anoscontribuicao' => isset($data['anos']) ? $data['anos'] : null,
+                'datacadastro' => Carbon::now()
+
 
             ];
 
-            if(isset($data['online']) && $data['online'] == true){
-                $dados_formatados['online'] = true;
+            if(isset($data['online'])){
+                if($data['online'] == 1 || $data['online'] == true){
+                    $dados_formatados['online'] = 1;
+                }else{
+                    $dados_formatados['online'] = 0;
+                }
+
             }
-            if(isset($data['presencial']) && $data['online'] == true){
-                $dados_formatados['online'] = false;
-            }
+
 
             //return json_encode([$dados_formatados,$data]);
             Atendimento::create($dados_formatados);

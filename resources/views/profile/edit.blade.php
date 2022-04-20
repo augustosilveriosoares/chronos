@@ -15,7 +15,7 @@
     <div class="container-fluid mt--6">
         <div class="row">
 
-            <div class="col">
+            <div class="col col-lg-6">
 
                 <div class="card">
                     <div class="card-header">
@@ -103,7 +103,61 @@
                     </div>
                 </div>
             </div>
+            <div class="col col-lg-6">
+                <div class="row">
+                    <div class="col mt-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Contas Google</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+
+                                        <a href="{{route('google.store')}}" ><button type="button" class="btn btn-success">Adicionar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+
+
+
+
+                                <!-- Comments -->
+
+                                <div class="mb-1">
+                                    @if($user->googleAccounts)
+                                        @foreach($user->googleAccounts as $gac)
+                                            <div class="media media-comment pt-1 pb-1">
+
+                                                <div class="media-body ml-2">
+                                                    <div class="media-comment-text">
+                                                        <h6 class="h5 mt-0">{{$gac->name ?? ''}}</h6>
+                                                        <p class="text-sm lh-160">Google ID: {{$gac->google_id ?? ''}}</p>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
+                                    @endif
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+
 
         @include('layouts.footers.auth')
     </div>

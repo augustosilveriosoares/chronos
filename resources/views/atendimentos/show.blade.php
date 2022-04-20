@@ -117,7 +117,7 @@
                                             <div class="col-lg-7 col-sm-12">
                                                 <div class="form-group{{ $errors->has('whats') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Whats') }}</label>
-                                                    <input type="text" name="whats" id="input-whats" class="form-control{{ $errors->has('whats') ? ' is-invalid' : '' }}" placeholder="{{ __('Whats') }}" value="{{ old('whats', $atendimento->whats??'') }}" required autofocus>
+                                                    <input type="text" name="whats" id="input-whats" class="form-control{{ $errors->has('whats') ? ' is-invalid' : '' }}" placeholder="{{ __('Whats') }}" value="{{ old('whats', $atendimento->whats??'') }}"  autofocus>
                                                     @include('alerts.feedback', ['field' => 'whats'])
                                                 </div>
 
@@ -127,7 +127,7 @@
                                             <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-idade">{{ __('E-mail') }}</label>
-                                                    <input type="text" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $atendimento->email??'') }}" required autofocus>
+                                                    <input type="text" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $atendimento->email??'') }}" >
                                                     @include('alerts.feedback', ['field' => 'idade'])
                                                 </div>
 
@@ -348,7 +348,7 @@
     <script>
         window.onload = function () {
             if ( $("#isonline").is(':checked')) {
-                document.getElementById('cidade_id').value = 0;
+
                 $("#cidade_id").prop('disabled',true);
             }
             // else {

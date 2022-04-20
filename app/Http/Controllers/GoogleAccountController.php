@@ -13,6 +13,9 @@ class GoogleAccountController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Display a listing of the google accounts.
+     */
     public function index()
     {
         return view('accounts', [
@@ -20,6 +23,10 @@ class GoogleAccountController extends Controller
         ]);
     }
 
+    /**
+     * Handle the OAuth connection which leads to 
+     * the creating of a new Google Account.
+     */
     public function store(Request $request, Google $google)
     {
         if (! $request->has('code')) {
@@ -27,27 +34,25 @@ class GoogleAccountController extends Controller
         }
 
         $google->authenticate($request->get('code'));
-
-        $account = $google->service('Oauth2');
-        $userInfo = $account->userinfo->get();
-
-
+        $account = $google->service('Plus')->people->get('me');
 
         auth()->user()->googleAccounts()->updateOrCreate(
             [
-                'google_id' => $userInfo->id,
+                'google_id' => $account->id,
             ],
             [
-                'name' =>$userInfo->email,
+                'name' => head($account->emails)->value,
                 'token' => $google->getAccessToken(),
             ]
         );
 
-
-        return redirect()->route('user.index');
+        return redirect()->route('google.index');
     }
 
-    public function destroy(GoogleAccount $googleAccount,  Google $google)
+    /**
+     * Revoke the account's token and delete the it locally.
+     */
+    public function destroy(GoogleAccount $googleAccount, Google $google)
     {
         $googleAccount->calendars->each->delete();
 
@@ -57,6 +62,4 @@ class GoogleAccountController extends Controller
 
         return redirect()->back();
     }
-
-
 }

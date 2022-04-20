@@ -26,7 +26,6 @@ class Atendimento extends Model
         'dataagendamento',
         'cidade_id',
         'online',
-        'retorno',
         'tipoatendimento_id'
 
 
