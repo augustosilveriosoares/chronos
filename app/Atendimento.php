@@ -26,7 +26,11 @@ class Atendimento extends Model
         'dataagendamento',
         'cidade_id',
         'online',
-        'tipoatendimento_id'
+        'tipoatendimento_id',
+        'created_by',
+        'criadopor',
+        'deleted_by',
+        'updated_by'
 
 
     ];
@@ -93,10 +97,15 @@ class Atendimento extends Model
     }
 
     public function isRetorno(){
+
+        return($this->retorno == 1);
         if ($this->retorno == 1){
             return true;
         }else{
             return false;
         }
     }
+
+
+
 }

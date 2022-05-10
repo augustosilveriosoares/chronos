@@ -38,8 +38,6 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nome">{{ __('Data Final') }}</label>
                                     <input type="date" name="datafinal"  value="{{ date('Y-m-d', strtotime($datafinal)) ?? '' }}" class="form-control"  autofocus>
-
-
                                 </div>
 
                             </div>
@@ -209,7 +207,7 @@
                                 padding: 0
                             },
                             legend: {
-                                display: false,
+                                display: true,
                                 position: 'bottom',
                                 labels: {
                                     usePointStyle: true,
@@ -618,7 +616,7 @@
                     },
                     plugins: {
                         labels: {
-                            render: 'percentage',
+                            render: 'value',
                             fontColor: function (data) {
                                 var rgb = hexToRgb(data.dataset.backgroundColor[data.index]);
                                 var threshold = 140;

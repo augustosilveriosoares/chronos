@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('color')->nullable();
             $table->foreignId('role_id')->references('id')->on('roles');
+            $table->foreignId('cidade_id')->nullable()->references('id')->on('cidades');
             $table->rememberToken();
             $table->timestamps();
 

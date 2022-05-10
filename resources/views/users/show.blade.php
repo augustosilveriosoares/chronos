@@ -49,12 +49,22 @@
                                                     <label class="form-control-label" for="input-name">Email</label>
                                                     <input type="text" name="email" id="input-nome" class="form-control"  value="{{$usuario->email??''}}"  >
                                                     <input type="file" class="form-control" name="image" id="image">
+                                                    <label class="form-control-label" for="input-cidade">{{ __('Cidade') }}</label>
+                                                    <select name="cidade_id" id="cidade_id" class="form-control{{ $errors->has('cidade_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Cidade') }}" >
+                                                        <option value="">Selecione</option>
+                                                        @foreach ($cidades as $cid)
+                                                            <option value="{{ $cid->id }}" {{ $cid->id == old('cidade_id',$usuario->cidade_id) ? 'selected' : '' }}>{{ $cid->nome }}</option>
+                                                        @endforeach
+
+                                                    </select>
+
 
                                                 </div>
 
 
 
                                             </div>
+
                                         </div>
 
 

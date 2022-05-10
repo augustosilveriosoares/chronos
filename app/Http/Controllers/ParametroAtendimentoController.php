@@ -56,7 +56,7 @@ class ParametroAtendimentoController extends Controller
     public function show()
     {
         $parametroAtendimento = ParametroAtendimento::all()->first;
-        dd('chego show');
+
 
         return view('parametro.show',[
             'parametro' => $parametroAtendimento
@@ -87,9 +87,21 @@ class ParametroAtendimentoController extends Controller
      */
     public function update(Request $request, ParametroAtendimento $parametroAtendimento)
     {
+
+
+
         $parametroAtendimento = ParametroAtendimento::find($request->input('id'));
         $parametroAtendimento->tempo = $request->input('tempo');
+        if ($request->has('onlyMyCity')) {
+            $parametroAtendimento->onlyMyCity = 1;
+        }else{
+            $parametroAtendimento->onlyMyCity = 0;
+        }
+
+
         $parametroAtendimento->save();
+
+
         return view('parametro.show',[
             'parametro' => $parametroAtendimento
 

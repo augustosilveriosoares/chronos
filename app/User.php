@@ -32,7 +32,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'picture' ,'role_id', 'google_calendar_id',
-        'image', 'color'
+        'image', 'color','cidade_id'
     ];
 
     /**
@@ -111,6 +111,11 @@ class User extends Authenticatable
     public function googleAccounts()
     {
         return $this->hasMany(GoogleAccount::class);
+    }
+
+    public function cidade()
+    {
+        return $this->hasOne(Cidade::class);
     }
 
     public function events()

@@ -16,16 +16,12 @@ class CreateAtendimentosTable extends Migration
         Schema::create('atendimentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('situacao_id')->references('id')->on('situacaos');
-            $table->foreignId('sexo_id')->nullable()->references('id')->on('sexos');
-            $table->foreignId('atuacao_id')->references('id')->on('atuacaos');
-            $table->foreignId('necessidade_id')->references('id')->on('necessidades');
+            $table->foreignId('necessidade_id')->nullable()->references('id')->on('necessidades');
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->foreignId('cidade_id')->nullable()->references('id')->on('cidades');
             $table->foreignId('tipoatendimento_id')->nullable()->references('id')->on('tipo_atendimentos');
 
             $table->string('nome')->nullable();;
-            $table->string('idade')->nullable();;
-            $table->string('anoscontribuicao')->nullable();;
             $table->string('whats')->nullable();;
             $table->string('email')->nullable();;
             $table->string('mensagem')->nullable();
@@ -33,6 +29,10 @@ class CreateAtendimentosTable extends Migration
             $table->dateTime('dataagendamento')->nullable();
             $table->boolean('online')->nullable();
             $table->boolean('retorno')->nullable();
+            $table->foreignId('created_by')->nullable()->references('id')->on('users');
+            $table->foreignId('deleted_by')->nullable()->references('id')->on('users');
+            $table->foreignId('updated_by')->nullable()->references('id')->on('users');
+
             $table->timestamps();
         });
     }

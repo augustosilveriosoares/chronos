@@ -1558,14 +1558,30 @@ var DatatableBasic = (function() {
 		// https://datatables.net/manual/options
 
 		var options = {
+
+
 			keys: !0,
 			select: {
 				style: "multi"
 			},
 			language: {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrados de _MAX_ registros)",
+                "infoThousands": ".",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando...",
+                "zeroRecords": "Nenhum registro encontrado",
+                "search": "Pesquisar",
+                "lengthMenu": "Exibir _MENU_ resultados por página",
+
+
 				paginate: {
 					previous: "<i class='fas fa-angle-left'>",
-					next: "<i class='fas fa-angle-right'>"
+					next: "<i class='fas fa-angle-right'>",
+
+
 				}
 			},
 		};

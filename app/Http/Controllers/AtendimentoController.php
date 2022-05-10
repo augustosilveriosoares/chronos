@@ -34,13 +34,12 @@ class AtendimentoController extends Controller
         $datainicial = date('Y-m-d', strtotime('01-01-2022'));;
         $datafinal = Carbon::now();
         $cidadeid = $request->input('cidadeid');
+//        if(!empty(auth()->user()->cidade_id) ){
+//            $cidadeid = auth()->user()->cidade_id;
+
+//       }
         $situacaoid = $request->input('situacaoid');
         $userid = $request->input('userid');
-
-
-
-
-
 
 
         $advogados = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
@@ -61,6 +60,7 @@ class AtendimentoController extends Controller
         if($userid >0){
             $queryA->where('user_id','=',$userid);
         }
+
         $queryA->orderByDesc('created_at',);
         $atendimentos = $queryA->get();
 
@@ -83,7 +83,9 @@ class AtendimentoController extends Controller
     public function create(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade, TipoAtendimento $tipoatendimento){
         $atendimento = new Atendimento();
         $atendimento->datacadastro = now();
-        $atendimento->dataagendamento = '';
+        $atendimento->dataagendamento = now();
+
+        $atendimento->cidade_id = auth()->user()->cidade_id;
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
         return view('atendimentos.show',[
             'atendimento' => $atendimento,
@@ -100,6 +102,7 @@ class AtendimentoController extends Controller
     public function store(Request $request,Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade){
 
         $atendimento = new Atendimento($request->all());
+        $atendimento->created_by = auth()->user()->id;
 
         if($request->filled('dataagendamento')){
                 $situacao =  Situacao::where('descricao','=','Agendado')->first();
@@ -134,6 +137,8 @@ class AtendimentoController extends Controller
     public function show(Atendimento $atendimento, Sexo $sexo, Necessidade $necessidade, Situacao $situacoes, Atuacao $atuacao,User $advogado, Cidade $cidade, TipoAtendimento $tipoAtendimento){
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
+        $criador = User::find($atendimento->created_by);
+        $atendimento->criadopor = $criador->name;
 
         return view('atendimentos.show',[
             'atendimento' => $atendimento,
@@ -186,7 +191,9 @@ class AtendimentoController extends Controller
         $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->where('id','!=',$atendimentoId)->get()->first();
 
         if(empty($verifica)){
+            $atendimento->updated_by = auth()->user()->id;
             $atendimento->update($request->all());
+
 
             if($atendimento->situacao->descricao == 'Pendente'){
                 if($request->filled('dataagendamento')){
@@ -232,6 +239,7 @@ class AtendimentoController extends Controller
 
         $situacao = DB::table('situacaos')->where('descricao','=','Cancelado')->get()->first();
         $atendimento->situacao_id = $situacao->id;
+        $atendimento->deleted_by = auth()->user()->id;
         $atendimento->save();
         return redirect()->route('atendimentos.index')->withErrors(__('Atendimento Excluido.'));
     }

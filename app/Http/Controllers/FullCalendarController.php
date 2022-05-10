@@ -26,7 +26,7 @@ class FullCalendarController extends Controller
 
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
-                if($eve->situacao->descricao != 'Cencelado'){
+                if($eve->situacao->descricao == 'Agendado'){
                     $event = new Event();
                     $event->atendimento_id = $eve->id;
                     $event->title = $eve->nome;
@@ -44,7 +44,10 @@ class FullCalendarController extends Controller
         }
 
 
-        return response()->json($events);
+        $adv = $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->orderBy('users.name', 'asc')->get();
+
+
+        return view('agendamento.index',['events'=> $events,'advogados'=>$adv]);
     }
 
     public function show($id)
@@ -52,9 +55,10 @@ class FullCalendarController extends Controller
         $ids = explode(',',$id);
         $events = [];
         $atendimentos = Atendimento::whereIn('user_id',$ids)->get();
+
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
-                if($eve->situacao->descricao != 'Cencelado'){
+                if($eve->situacao->descricao == 'Agendado'){
                     $event = new Event();
                     $event->atendimento_id = $eve->id;
                     $event->title = $eve->nome;

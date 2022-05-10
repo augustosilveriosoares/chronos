@@ -21,7 +21,7 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3>{{ __('Atendimento') }}  </h3>
-                                <span class="text-muted small">Criado em {{date('d-m-Y', strtotime($atendimento->datacadastro))}} </span>
+                                <span class="text-muted small">Criado em {{date('d-m-Y', strtotime($atendimento->datacadastro)) }} por {{$atendimento->criadopor ?? auth()->user()->name}}. </span>
                             </div>
                             <div class="col-4 text-right">
                                 <a href="{{ route('atendimentos.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
@@ -85,36 +85,8 @@
                                                 <input type="hidden" name="datacadastro" id="" class="form-control{{ $errors->has('datacadastro') ? ' is-invalid' : '' }}" placeholder="{{ __('Data') }}" value="{{date('Y-m-d\TH:i', strtotime($atendimento->datacadastro))}}"  >
                                                 @include('alerts.feedback', ['field' => 'datacadastro'])
                                             </div>
-                                            <div class="col-lg-1 col-sm-6">
-                                                <div class="form-group{{ $errors->has('idade') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="input-idade">{{ __('Idade') }}</label>
-                                                    <input type="text" name="idade" id="input-idade" class="form-control{{ $errors->has('idade') ? ' is-invalid' : '' }}" placeholder="{{ __('Idade') }}" value="{{ old('nome', $atendimento->idade??'') }}" required autofocus>
-                                                    @include('alerts.feedback', ['field' => 'idade'])
-                                                </div>
 
-                                            </div>
-                                            <div class="col-lg-2 col-sm-6">
-                                                <div class="form-group{{ $errors->has('contribuicao') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="input-contribuicao">{{ __('Contribuição') }}</label>
-                                                    <input type="text" name="anoscontribuicao" id="input-anoscontribuicao" class="form-control{{ $errors->has('anoscontribuicao') ? ' is-invalid' : '' }}" placeholder="{{ __('Contribuição') }}" value="{{ old('anoscontribuicao', $atendimento->anoscontribuicao ??'') }}" required autofocus>
-                                                    @include('alerts.feedback', ['field' => 'anoscontribuicao'])
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-2 col-sm-12">
-                                                <div class="form-group{{ $errors->has('sexo_id') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="input-idade">{{ __('Sexo') }}</label>
-                                                    <select name="sexo_id" id="input-sexo" class="form-control{{ $errors->has('sexo_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Sexo') }}" required>
-                                                        <option value="">-</option>
-                                                        @foreach ($sexos as $sex)
-                                                            <option value="{{ $sex->id }}" {{ $sex->id == old('sexo_id',$atendimento->sexo_id) ? 'selected' : '' }}>{{ $sex->descricao }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @include('alerts.feedback', ['field' => 'idade'])
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-7 col-sm-12">
+                                            <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('whats') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-nome">{{ __('Whats') }}</label>
                                                     <input type="text" name="whats" id="input-whats" class="form-control{{ $errors->has('whats') ? ' is-invalid' : '' }}" placeholder="{{ __('Whats') }}" value="{{ old('whats', $atendimento->whats??'') }}"  autofocus>
@@ -122,8 +94,6 @@
                                                 </div>
 
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-idade">{{ __('E-mail') }}</label>
@@ -132,6 +102,7 @@
                                                 </div>
 
                                             </div>
+
                                             <div class="col-lg-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('necessidade_id') ? ' has-danger' : '' }}">
                                                     <label class="form-control-label" for="input-idade">{{ __('Necessidade') }}</label>
@@ -146,21 +117,8 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-4 col-sm-12">
-                                                <div class="form-group{{ $errors->has('atuacao_id') ? ' has-danger' : '' }}">
-                                                    <label class="form-control-label" for="input-atuacao">{{ __('Atuação') }}</label>
-                                                    <select name="atuacao_id" id="input-atuacao" class="form-control{{ $errors->has('atuacao_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Atuação') }}" required>
-                                                        @foreach ($atuacoes as $atu)
-                                                            <option value="{{ $atu->id }}" {{ $atu->id == old('atuacao_id',$atendimento->atuacao_id) ? 'selected' : '' }}>{{ $atu->descricao }}</option>
-                                                        @endforeach
-
-                                                    </select>
-                                                    @include('alerts.feedback', ['field' => 'idade'])
-                                                </div>
-
-                                            </div>
-
                                         </div>
+
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-12">
                                                 <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">

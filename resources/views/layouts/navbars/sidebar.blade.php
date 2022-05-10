@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-item {{ $elementName == 'agendamento' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('agendamento.index') }}">
+                        <a class="nav-link" href="{{ route('fullcalendar.index') }}">
                             <i class="ni ni-calendar-grid-58 text-dark"></i>
                             <span class="nav-link-text">{{ __('Agenda') }}</span>
                         </a>

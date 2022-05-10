@@ -16,7 +16,8 @@ class ParametroAtendimentoSeeder extends Seeder
     {
         DB::table('parametro_atendimentos')->insert([
             'id' => 1,
-            'tempo' => '5',
+            'tempo' => '30',
+            'onlyMyCity' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);

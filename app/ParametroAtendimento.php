@@ -9,5 +9,13 @@ class ParametroAtendimento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tempo'];
+    protected $fillable = ['tempo','onlyMyCity'];
+
+    public function onlyMyCity(){
+        if ($this->onlyMyCity == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

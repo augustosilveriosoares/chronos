@@ -52,6 +52,8 @@
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
                                 </div>
+                                @if(auth()->user()->role->id != 3)
+
                                 <div class="col-sm-12 col-lg">
                                     <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Cidade</h6>
@@ -66,6 +68,7 @@
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-sm-12 col-lg-1 text-center">
                                     <button type="submit" class="btn btn-lg btn-block btn-outline mt-3 mr-3" >
                                         <span class="btn-inner--icon">
@@ -202,6 +205,7 @@
 @endpush
 
 @push('js')
+
     <script src="{{ asset('argon') }}/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -210,4 +214,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+
+
 @endpush

@@ -17,6 +17,7 @@
 */
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use App\Role;
 use App\User;
 use App\Http\Requests\UserRequest;
@@ -39,7 +40,7 @@ class UserController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('users.index', ['users' => $model->with('role')->get()]);
+        return view('users.index', ['users' => $model->with('role')->get(),'cidades'=>Cidade::all()]);
     }
 
     /**
@@ -79,7 +80,7 @@ class UserController extends Controller
      */
     public function edit(User $user, Role $model)
     {
-        return view('users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name'])]);
+        return view('users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name']),'cidades'=>Cidade::all()]);
     }
 
     /**

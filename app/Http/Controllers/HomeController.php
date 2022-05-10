@@ -28,8 +28,9 @@ class HomeController extends Controller
     public function index( Request  $request)
     {
 
-        $datainicial = date('Y-m-d', strtotime('01-01-2022'));;
-        $datafinal = Carbon::now();
+        $datainicial = date('Y-m-d', strtotime('01-01-2022'));
+        $datafinal = date('Y-m-d', strtotime('31-12-2022'));
+        //$datafinal = Carbon::now();
 
         if($request->has('dataincial')){
             $datainicial = $request->input('dataincial');
@@ -37,8 +38,6 @@ class HomeController extends Controller
         if($request->has('datafinal')){
             $datafinal = $request->input('datafinal');
         }
-
-
 
         $dashboard = new Dashboard();
 
@@ -68,7 +67,7 @@ class HomeController extends Controller
             $dash->id = $advogados[$i]->id;
             $dash->picture = $advogados[$i]->picture;
 
-            $dash->total = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','!=','Cancelado')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.datacadastro)'),[$datainicial,$datafinal])->count();
+            $dash->total = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','!=','Cancelado')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
             $dash->agendado = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
             $dash->analise = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Análise')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
             $dash->futuro = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Futuro')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();

@@ -28,6 +28,12 @@ class TipoAtendimentoSeeder extends Seeder
         ]);
         DB::table('tipo_atendimentos')->insert([
             'id' => 3,
+            'descricao' => 'Informação',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('tipo_atendimentos')->insert([
+            'id' => 4,
             'descricao' => 'Orientação',
             'created_at' => now(),
             'updated_at' => now()

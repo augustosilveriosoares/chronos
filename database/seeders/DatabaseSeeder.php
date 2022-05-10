@@ -22,10 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([TagsTableSeeder::class, CategoriesTableSeeder::class, ItemsTableSeeder::class]);
         $this->call( NecessidadeSeeder::Class);
         $this->call(SituacaoSeeder::class);
-        $this->call(SexoSeeder::class);
-                $this->call(AtuacaoSeeder::class);
         $this->call(AtendimentoSeeder::class);
-        $this->call(EventsSeeder::class);
         $this->call(CidadeSeeder::class);
         $this->call(TipoAtendimentoSeeder::class);
         $this->call(ParametroAtendimentoSeeder::class);

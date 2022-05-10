@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'augusto@fkprevidencia.adv.br',
             'password' => Hash::make('augusto1120301'),
             'role_id' => 1,
+            'cidade_id' => 1,
             'picture' => 'profile_user/tgcoppt8TQLvAXr0LPeCWQVdRGLwqEy5Uni78EdS.jpeg',
             'created_at' => now(),
             'updated_at' => now(),
@@ -137,6 +138,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/wyBd9QvN5eCSQZlcM0AFhE6frxHlAKTeUienangr.jpeg',
             'role_id' => 3,
+            'cidade_id' => 5,
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#c49141'
@@ -149,6 +151,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/zNYyv92siNPuHu2LeBFFJpInGpCdTyzLc6Qad1Ks.jpeg',
             'role_id' => 3,
+            'cidade_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#c47841'
@@ -161,6 +164,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/oItQFsUkcJQleuMkVXKp6XNWKVJ06bQ1zUmTVQ0P.jpeg',
             'role_id' => 3,
+            'cidade_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#c45c41'
@@ -173,6 +177,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/dsuko4cLVVRtiVzHFsW0sZ8NHMNmlVWDgXTSB60h.jpeg',
             'role_id' => 3,
+            'cidade_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#ba91f2'
@@ -185,6 +190,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/lqO4ERHegxwC9tq6lw6YP8pQqbCeRWjbj8Talq9q.jpeg',
             'role_id' => 3,
+            'cidade_id' => 6,
             'created_at' => now(),
             'updated_at' => now(),
             'color' => '#f291e3'
@@ -192,6 +198,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Emanuele Ribeiro',
             'email' => 'emanuele@fkprevidencia.adv.br',
+            'cidade_id' => 1,
             'password' => Hash::make('fkprev4026'),
             'picture' => 'profile_user/2j2UAw3UPvR5lDigBZQQJsHGH8L4TmbnVCvNLCxT.jpeg',
             'role_id' => 3,

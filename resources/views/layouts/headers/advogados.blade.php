@@ -18,16 +18,16 @@
 
                     <div class="card-body">
                         <h3 class="card-title mb-3 text-center">{{$adv->name}}</h3>
-                        <h4 class="text-muted text-center"><strong class="text-primary">{{$adv->total}}</strong> Atendimentos</h4>
+                        <h4 class="text-muted text-center"><strong class="text-primary">{{$adv->total}} Atendimentos</strong></h4>
 
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->total?? '0'}}</strong> Agendados</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->agendado?? '0'}}</strong> Análise</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Futuro</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Infrutifero</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->totalprocesso?? '0'}}</strong> Processos</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->agendado?? '0'}}</strong> Agendados</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->analise?? '0'}}</strong> Análise</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->futuro?? '0'}}</strong> Futuro</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->infrutifero?? '0'}}</strong> Infrutifero</h4></li>
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->processo?? '0'}}</strong> Processos</h4></li>
                     </ul>
                 </div>
     </div>

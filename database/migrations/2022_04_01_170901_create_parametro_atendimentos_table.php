@@ -15,7 +15,8 @@ class CreateParametroAtendimentosTable extends Migration
     {
         Schema::create('parametro_atendimentos', function (Blueprint $table) {
             $table->id();
-            $table->string('tempo');
+            $table->string('tempo')->nullable();
+            $table->boolean('onlyMyCity')->nullable();
             $table->timestamps();
         });
     }

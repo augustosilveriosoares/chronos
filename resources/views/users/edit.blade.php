@@ -89,6 +89,16 @@
                                     <label for="example-color-input" class="form-control-label">Cor</label>
                                     <input type="color" name="color" id="input-color" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" placeholder="{{ __('Color') }}" value="{{ old('color', $user->color) }}" required>
                                 </div>
+                                <div class="form-group">
+                                <label class="form-control-label" for="input-cidade">{{ __('Cidade') }}</label>
+                                <select name="cidade_id" id="cidade_id" class="form-control{{ $errors->has('cidade_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Cidade') }}" >
+                                    <option value="">Selecione</option>
+                                    @foreach ($cidades as $cid)
+                                        <option value="{{ $cid->id }}" {{ $cid->id == old('cidade_id',$user->cidade_id) ? 'selected' : '' }}>{{ $cid->nome }}</option>
+                                    @endforeach
+
+                                </select>
+                                </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
                                 </div>

@@ -17,6 +17,7 @@
 */
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use Gate;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit',['user' =>  auth()->user()]);
+        return view('profile.edit',['user' =>  auth()->user(),'cidades'=>Cidade::all()]);
     }
 
     /**
@@ -52,7 +53,7 @@ class ProfileController extends Controller
                 ->except([$request->hasFile('photo') ? '' : 'picture'])
         );
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back()->with()->withStatus(__('Profile successfully updated.'));
     }
 
     /**
