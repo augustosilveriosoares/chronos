@@ -16,7 +16,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <span><h4>{{$atendimento->nome ?? ''}}  </h4></span>
+                                <span><h2>{{$atendimento->nome ?? ''}}  </h2></span>
 
                             </div>
 
@@ -24,32 +24,30 @@
                     </div>
                     <div class="card-body bg-secondary">
 
+
                         <div class="row">
-                            <div class="col-lg-2 col-sm-6">
+                            <div class="col-lg-3 col-sm-6">
+                                <h6 class="text-gray">Advogado</h6>
+                                <h4>{{$atendimento->user->name ?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <h6 class="text-gray">Cidade</h6>
+                                <h4>{{$atendimento->cidade->nome ?? ''}}</h4>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
                                 <h6 class="text-gray">Tipo Atendimento</h6>
                                 <h4>{{$atendimento->tipoatendimento->descricao ?? ''}}</h4>
                             </div>
-                            <div class="col-lg-2 col-sm-6">
+                            <div class="col-lg-3 col-sm-6">
                                 <h6 class="text-gray">Necessidade</h6>
                                 <h4>{{$atendimento->necessidade->descricao?? ''}}</h4>
                             </div>
-                            <div class="col-lg-2 col-sm-6">
-                                <h6 class="text-gray">Atuação</h6>
-                                <h4>{{$atendimento->atuacao->descricao?? ''}}</h4>
-                            </div>
 
-                            <div class="col-lg-2 col-sm-6">
-                                <h6 class="text-gray">Idade</h6>
-                                <h4>{{$atendimento->idade ?? ''}}</h4>
-                            </div>
-                            <div class="col-lg-2 col-sm-6">
-                                <h6 class="text-gray">Contribuição</h6>
-                                <h4>{{$atendimento->anoscontribuicao ?? ''}}</h4>
-                            </div>
-                            <div class="col-lg-2 col-sm-6">
-                                <h6 class="text-gray">Forma</h6>
-                                <h4>{{$atendimento->isOnline() ? 'Online':'Presencial'}}</h4>
-                            </div>
+
+{{--                            <div class="col-lg-2 col-sm-6">--}}
+{{--                                <h6 class="text-gray">Forma</h6>--}}
+{{--                                <h4>{{$atendimento->isOnline() ? 'Online':'Presencial'}}</h4>--}}
+{{--                            </div>--}}
 
                         </div>
                     </div>

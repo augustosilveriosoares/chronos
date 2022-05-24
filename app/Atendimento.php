@@ -89,7 +89,11 @@ class Atendimento extends Model
     }
 
     public function isOnline(){
-        if ($this->online == 1){
+
+        if($this->online == null){
+            return false;
+        }
+        else if ($this->online == 1){
             return true;
         }else{
             return false;
@@ -105,6 +109,8 @@ class Atendimento extends Model
             return false;
         }
     }
+
+
 
 
 

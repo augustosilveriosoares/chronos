@@ -292,12 +292,14 @@
         $("#isonline").on('change', function() {
             if ($(this).is(':checked')) {
                 document.getElementById('cidade_id').value = 0;
+                $("#cidade_id").prop('required',false);
                 $("#cidade_id").prop('disabled',true);
             }
             else {
                 switchStatus = $(this).is(':checked');
                 document.getElementById('cidade_id').value = 1;
                 $("#cidade_id").prop('disabled',false);
+                $("#cidade_id").prop('required',true);
             }
         });
 

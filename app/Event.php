@@ -13,6 +13,7 @@ class Event extends Model
         'atendimento_id', 'title', 'description', 'allDay', 'start', 'end','user_id','color'
     ];
 
+
     public function calendar()
     {
         return $this->belongsTo(Calendar::class);
@@ -32,4 +33,12 @@ class Event extends Model
     {
         return $this->start->diffForHumans($this->start, true);
     }
+
+    public function isAllDay(){
+        if($this->allDay == 1){
+            return true;
+        }else{
+            return false;
+        }
+}
 }

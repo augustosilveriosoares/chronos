@@ -104,6 +104,17 @@ class AtendimentoController extends Controller
         $atendimento = new Atendimento($request->all());
         $atendimento->created_by = auth()->user()->id;
 
+        if ($request->has('isonline')) {
+            $on = $request->input('isonline');
+            if($on == 'on'){
+                $atendimento->online = 1;
+            }else{
+                $atendimento->online = 0;
+            }
+
+        }
+
+
         if($request->filled('dataagendamento')){
                 $situacao =  Situacao::where('descricao','=','Agendado')->first();
                 $atendimento->situacao_id = $situacao->id;
@@ -138,7 +149,7 @@ class AtendimentoController extends Controller
 
         $advogado = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
         $criador = User::find($atendimento->created_by);
-        $atendimento->criadopor = $criador->name;
+        $atendimento->criadopor = $criador->name??'';
 
         return view('atendimentos.show',[
             'atendimento' => $atendimento,

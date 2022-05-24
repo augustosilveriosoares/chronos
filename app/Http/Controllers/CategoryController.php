@@ -63,6 +63,7 @@ class CategoryController extends Controller
     {
         $model->create($request->all());
 
+
         return redirect()->route('category.index')->withStatus(__('Category successfully created.'));
     }
 

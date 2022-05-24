@@ -18,7 +18,7 @@ class CreateEventsTable extends Migration
 
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('atendimento_id')->references('id')->on('atendimentos');
+            $table->foreignId('atendimento_id')->nullable()->references('id')->on('atendimentos');
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->string('allDay')->nullable();
