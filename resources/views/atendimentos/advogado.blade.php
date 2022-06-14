@@ -88,7 +88,7 @@
                                     @include('alerts.feedback', ['field' => 'idade'])
                                 </div>
                             </div>
-                            <div class="col-lg-4 mt-lg-4 ">
+                            <div class="col mt-lg-4 ">
                                 <div class="col text-center">
                                     <button type="submit" class="btn btn-warning btn-lg btn-block">{{ __('Salvar') }}</button>
                                 </div>

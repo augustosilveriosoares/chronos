@@ -24,7 +24,6 @@ return [
     'allowed_origins' => ['https://agendamento.fkprevidencia.adv.br','agendamento.fkprevidencia.adv.br'],
 
 
-
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],

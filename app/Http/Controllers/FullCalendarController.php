@@ -80,7 +80,8 @@ class FullCalendarController extends Controller
         $events = [];
 
           //  $atendimentos = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$request->start,$request->end])->get();
-        $atendimentos = Atendimento::whereBetween('dataagendamento',[$request->start,$request->end])->get();
+
+        $atendimentos = Atendimento::where('situacao_id',2)->whereBetween('dataagendamento',[$request->start,$request->end])->get();
 
 
             foreach ($atendimentos as $eve){
@@ -127,7 +128,6 @@ class FullCalendarController extends Controller
 
 
     }
-
 
     public function show($id)
     {

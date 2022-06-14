@@ -354,7 +354,7 @@ class AtendimentoController extends Controller
         $id = str_replace('> ','',$id);
         $atendimento = Atendimento::find($id);
 
-        $situacoes = Situacao::where('descricao','!=','Agendado')->where('descricao','!=','Pendente')->where('descricao','!=','Cancelado')->get();
+        $situacoes = Situacao::where('descricao','!=','Agendado')->where('descricao','!=','Pendente')->get();
 
         return view('atendimentos.advogado',[
             'atendimento' => $atendimento,
