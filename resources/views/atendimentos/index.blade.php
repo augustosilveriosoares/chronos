@@ -20,7 +20,7 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                        <form action="{{ route('atendimentos.index', [$cidadeid,$userid,$situacaoid]) }}" method="get" >
+                        <form action="{{ route('atendimentos.index', [$cidadeid,$userid,$situacaoid,$tipoid]) }}" method="get" >
                             @csrf
                         <div class="row">
                                 <div class=" col-sm-12 col-lg">
@@ -37,6 +37,20 @@
                                         @include('alerts.feedback', ['field' => 'idade'])
                                     </div>
                                 </div>
+                            <div class=" col-sm-12 col-lg">
+                                <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
+                                    <h6 class="text-gray small">Tipo</h6>
+                                    <select name="tipoatendimentoid" id="input-user" class="form-control-sm" placeholder="{{ __('Tipo') }}"  style="width: 100% !important">
+                                        <option value="0" selected>Todos</option>
+                                        @foreach ($tipoatendimentos as $ta)
+
+                                            <option value="{{ $ta->id }}" {{ $ta->id == old('tipoid',$tipoid) ? 'selected' : '' }}>{{ $ta->descricao }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'idade'])
+                                </div>
+                            </div>
                                 <div class="col-sm-12 col-lg">
                                     <div class="form-group{{ $errors->has('situacao_id') ? ' has-danger' : '' }}">
                                         <h6 class="text-gray small">Situação</h6>
@@ -122,11 +136,10 @@
                             <tr>
 
                                 <th scope="col-sm-0">{{ __('Cliente') }}</th>
-                                <th scope="col">{{ __('Necessidade') }}</th>
-                                <th scope="col">{{ __('Tipo') }}</th>
                                 <th scope="col">{{ __('Advogado') }}</th>
-                                <th scope="col">{{ __('Agendado') }}</th>
+                                <th scope="col">{{ __('Tipo') }}</th>
                                 <th scope="col">{{ __('Cidade') }}</th>
+                                <th scope="col">{{ __('Data') }}</th>
                                 <th scope="col">{{ __('Situação') }}</th>
                                 <th scope="col">{{ __('Ação') }}</th>
 
@@ -143,16 +156,18 @@
                             @foreach ($atendimentos as $atendimento)
                                 <tr>
 
-                                    <td> {{ $atendimento->nome ?? ''}}</td>
-                                    <td>{{ $atendimento->necessidade->descricao ?? ''}}</td>
+                                    <td><a href="{{ route('atendimentos.show', $atendimento) }}"> {{ $atendimento->nome ?? ''}}</a></td>
 
-                                    <td>
-                                        {{$atendimento->tipoatendimento->descricao ?? ''}}
-                                    </td>
                                     <td>
 
                                         {{$atendimento->user->name ?? ''}}
                                     </td>
+
+                                    <td>{{$atendimento->tipoatendimento->descricao ?? ''}}</td>
+
+                                    <td>{{$atendimento->cidade->nome ?? ''}}</td>
+
+
 
                                     @if($atendimento->dataagendamento != null)
                                         <td>{{ date('d-m-y H:i', strtotime($atendimento->dataagendamento))}}</td>
@@ -162,7 +177,7 @@
 
 
 
-                                    <td>{{$atendimento->cidade->nome ?? ''}}</td>
+
                                     <td><span class="badge badge-default" style="background-color:{{ $atendimento->situacao->cor}}">{{ $atendimento->situacao->descricao ?? ''}}</span></td>
 
                                     <td>

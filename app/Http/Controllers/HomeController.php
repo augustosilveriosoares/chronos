@@ -46,8 +46,8 @@ class HomeController extends Controller
         $dashboard->agendado = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
         $dashboard->analise = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Análise')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
         $dashboard->futuro = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Futuro')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-        $dashboard->infrutifero = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Infrutifero')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-        $dashboard->processo = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Processo')->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+        $dashboard->consultoria = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.id','=',7)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+        $dashboard->processo = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->whereBetween('s.id',[4,5])->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
 
 
         $dashadv = array();
@@ -71,8 +71,8 @@ class HomeController extends Controller
             $dash->agendado = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Agendado')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
             $dash->analise = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Análise')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
             $dash->futuro = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Futuro')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-            $dash->infrutifero = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Infrutifero')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
-            $dash->processo = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.descricao','=','Processo')->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+            $dash->consultoria = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->where('s.id','=',7)->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
+            $dash->processo = DB::table('atendimentos as a')->join('situacaos as s', 's.id', '=', 'a.situacao_id')->whereBetween('s.id',[4,5])->where('a.user_id','=',$advogados[$i]->id)->whereBetween(\DB::raw('DATE(a.dataagendamento)'),[$datainicial,$datafinal])->count();
 
             $dashadv[$i] = $dash;
         }

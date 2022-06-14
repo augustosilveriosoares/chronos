@@ -34,6 +34,12 @@
                             <span class="nav-link-text">{{ __('Atendimentos') }}</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ $elementName == 'transferencias' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('transferencia.index') }}">
+                            <i class="ni ni-ui-04 text-dark"></i>
+                            <span class="nav-link-text">{{ __('Transferência') }}</span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ $elementName == 'agendamento' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('fullcalendar.index') }}">
                             <i class="ni ni-calendar-grid-58 text-dark"></i>

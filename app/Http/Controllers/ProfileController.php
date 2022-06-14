@@ -53,7 +53,7 @@ class ProfileController extends Controller
                 ->except([$request->hasFile('photo') ? '' : 'picture'])
         );
 
-        return back()->with()->withStatus(__('Profile successfully updated.'));
+        return back()->withStatus('Profile successfully updated.');
     }
 
     /**

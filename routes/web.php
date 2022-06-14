@@ -13,10 +13,12 @@
 
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
 Route::post('zap','AtendimentoController@zap')->name('zap');
+Route::post('webscheduling','AtendimentoController@webscheduling')->name('webscheduling');
 
 Auth::routes();
 
 Route::get('dashboard', 'HomeController@index')->name('home');
+
 Route::get('pricing', 'PageController@pricing')->name('page.pricing');
 Route::get('lock', 'PageController@lock')->name('page.lock');
 
@@ -49,7 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('event/destroy/{id}', [\App\Http\Controllers\EventController::class,'destroy'])->name('event.destroy');
 
 
-
+    Route::get('transferencia', ['as' => 'transferencia.index', 'uses' => 'UtilController@transferencia']);
+    Route::post('transferencia', ['as' => 'transferencia.transfere', 'uses' => 'UtilController@transfereAtendimentos']);
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

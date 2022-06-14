@@ -20,6 +20,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/zap',
-        '/public/zap'
+        '/public/zap',
+        '/webscheduling',
+        '/public/webscheduling'
+
     ];
 }

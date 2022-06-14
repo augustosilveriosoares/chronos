@@ -63,7 +63,7 @@
                     <!-- Card header -->
 
                     <!-- Card body -->
-                    <div class="card-body p-4">
+                    <div class="card-body p-4" id="blur">
                         <div name="calendar" class="calendar" data-toggle="calendar" id="calendar"></div>
                     </div>
                 </div>
@@ -179,6 +179,13 @@
             height: 50px !important;
 
         }
+        .desfoque {
+            -webkit-filter: blur(3px);
+            -moz-filter: blur(3px);
+            -o-filter: blur(3px);
+            -ms-filter: blur(3px);
+            filter: blur(3px);
+        }
         @media (max-width: 767.98px) {
             .fc .fc-toolbar.fc-header-toolbar {
                 display: block;
@@ -253,11 +260,27 @@
             }
             var calendar = new FullCalendar.Calendar(calendarEl, {
 
+                loading: function (bool) {
 
+
+                    if (bool) {
+
+                        var element = document.getElementById('blur');
+                        console.log(element + '- Caaregando');
+                        element.classList.add("desfoque");
+
+                    }
+                    else {
+                        var element = document.getElementById('blur');
+                        console.log(element + '- foiu');
+                        element.classList.remove("desfoque");
+                    }
+                },
 
                 locale:'pt-br',
                 height: 'auto',
                 selectable :true,
+
 
                 headerToolbar: {
                     left: 'prev,next,today',
@@ -268,7 +291,10 @@
                 // events: eventos,
                 events: "{{route('fullcalendar.events')}}",
 
+
+
                 initialView: 'dayGridMonth',
+
 
                 eventClick: function(info) {
 
@@ -300,7 +326,7 @@
 
 
                     let currentDate = new Date();
-                    let time = currentDate.getHours() + ":" + (currentDate.getMinutes()<10?'0':'') + currentDate.getMinutes();
+                    let time = (currentDate.getHours()<10?'0':'') +currentDate.getHours()+ ":" + (currentDate.getMinutes()<10?'0':'') + currentDate.getMinutes();
                     var isoDate = event.dateStr + 'T'+time;
 
                     console.log(isoDate);

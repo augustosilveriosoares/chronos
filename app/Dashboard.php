@@ -13,7 +13,7 @@ class Dashboard extends Model
         'agendado',
         'analise',
         'futuro',
-        'infrutifero',
+        'consultoria',
         'pendente',
         'processo'
     ];

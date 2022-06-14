@@ -1,4 +1,5 @@
-@extends('layouts.app', [
+@extends('la
+youts.app', [
 'parentSection' => '',
 'elementName' => 'calendar'
 ])

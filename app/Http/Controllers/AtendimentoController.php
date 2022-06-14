@@ -12,7 +12,7 @@ use App\TipoAtendimento;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Date;
 use function PHPUnit\Framework\isNull;
 
@@ -40,16 +40,21 @@ class AtendimentoController extends Controller
 //       }
         $situacaoid = $request->input('situacaoid');
         $userid = $request->input('userid');
+        $tipoid = $request->input('tipoatendimentoid');
 
 
         $advogados = DB::table('users')->join('roles','roles.id','=','users.role_id')->where('roles.name','=','Advogado')->select('users.*')->get();
         $situacao = DB::table('situacaos')->where('descricao','=','Cancelado')->get()->first();
-        $atendimentos = Atendimento::where('situacao_id', '!=', $situacao->id);
+
+
+
+
 
         $situacoes = Situacao::where('descricao','!=','Cancelado')->get();
 
 
         $queryA = Atendimento::query();
+
         $queryA->where('situacao_id', '!=', $situacao->id);
         if($cidadeid >0){
             $queryA->where('cidade_id','=',$cidadeid);
@@ -60,10 +65,14 @@ class AtendimentoController extends Controller
         if($userid >0){
             $queryA->where('user_id','=',$userid);
         }
+        if($tipoid >0){
+            $queryA->where('tipoatendimento_id','=',$tipoid);
+        }
+        $queryA->orderBy('NOME', 'ASC');
+       // $queryA->orderBy(DB::raw("DATE_FORMAT(dataagendamento,'%d-%M-%Y')"), 'DESC');
 
-        $queryA->orderByDesc('created_at',);
         $atendimentos = $queryA->get();
-
+        $tipoatendimento = TipoAtendimento::all();
 
 
 
@@ -76,7 +85,9 @@ class AtendimentoController extends Controller
             'datafinal' => $datafinal,
             'cidadeid' => $cidadeid,
             'userid' => $userid,
-            'situacaoid' => $situacaoid]);
+            'tipoid' => $tipoid,
+            'situacaoid' => $situacaoid,
+            'tipoatendimentos' => $tipoatendimento]);
 
     }
 
@@ -124,7 +135,7 @@ class AtendimentoController extends Controller
                 $dataHora = str_replace('T', ' ', $dataHora);
 
 
-                $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->get()->first();
+                $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->where('situacao_id','=' ,2)->get()->first();
 
                 if(!empty($verifica)){
                     return redirect()->back()->withInput()->withErrors(['errors' => 'Já existe um atendimento agendado para '.$verifica->user->name.' em '. date_format(new \DateTime($verifica->dataagendamento),'d-m-y H:i').'. Cliente '.$verifica->nome.'.']);return redirect()->back()->withErrors(['errors' => 'Já existe um atendimento agendado para '.$verifica->user->name.' em '. date_format(new \DateTime($verifica->dataagendamento),'d-m-y H:i').'. Cliente '.$verifica->nome.'.']);
@@ -199,9 +210,10 @@ class AtendimentoController extends Controller
         $dataHora = str_replace('T', ' ', $dataHora);
         $atendimentoId = $request->input('id');
 
-        $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->where('id','!=',$atendimentoId)->get()->first();
+        $verifica = Atendimento::where('user_id','=',$advogadoId)->where('dataagendamento','=' ,$dataHora)->where('id','!=',$atendimentoId)->where('situacao_id','=' ,2)->get()->first();
 
         if(empty($verifica)){
+            $atendimento->updated_by = auth()->user()->id;
             $atendimento->updated_by = auth()->user()->id;
             $atendimento->update($request->all());
 
@@ -215,7 +227,7 @@ class AtendimentoController extends Controller
 
             if ($request->has('isonline')) {
                 $atendimento->online = 1;
-                $atendimento->cidade_id = null;
+
             }
             else {
                 $atendimento->online = 0;
@@ -289,6 +301,45 @@ class AtendimentoController extends Controller
             //return json_encode([$dados_formatados,$data]);
             Atendimento::create($dados_formatados);
             return response("Atendimento criado com sucesso!", 200);
+
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+        }
+
+
+    }
+
+    public function webscheduling(Request $request){
+
+        try {
+
+            $data = $request->all();
+            $dados_formatados = [
+
+                'necessidade_id' => isset($data['necessidadeid']) ? $data['necessidadeid'] : null,
+                'situacao_id' => 1,
+                'tipoatendimento_id' =>1,
+
+                'cidade_id' => isset($data['cidadeid']) ? $data['cidadeid'] : null,
+                'nome' => isset($data['nome']) ? $data['nome'] : null,
+                'whats' => isset($data['whats']) ? $data['whats'] : null,
+                'datacadastro' => Carbon::now(),
+                'created_by' => 25
+
+
+            ];
+
+            if(isset($data['online'])){
+                if($data['online'] == 1 || $data['online'] == true){
+                    $dados_formatados['online'] = 1;
+                }else{
+                    $dados_formatados['online'] = 0;
+                }
+
+            }
+
+            Atendimento::create($dados_formatados);
+            return response(200);
 
         } catch (\Throwable $th) {
             return response($th->getMessage(), 500);

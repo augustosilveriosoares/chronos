@@ -23,7 +23,8 @@ class FullCalendarController extends Controller
 //            ->where('s.descricao','!=','Cancelado')
 //            ->select('a.*')->get();
 
-        $atendimentos = Atendimento::all();
+        //$atendimentos = Atendimento::all();
+        $atendimentos = Atendimento::where('situacao_id',2)->get();
 
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
@@ -41,6 +42,24 @@ class FullCalendarController extends Controller
                     array_push($events,$event);
 
                 }
+            }
+            $lembretes = Event::where('user_id',auth()->user()->id)->get();
+            foreach ($lembretes as $lem){
+
+
+                $event = new Event();
+                $event->id = $lem->id;
+                $event->title = $lem->title;
+                $event->allDay = $lem->isAllDay();
+                $event->start = $lem->start;
+                $event->user_id = $lem->user_id;
+                $event->color = $lem->color;
+                array_push($events,$event);
+
+
+
+
+
             }
 
 
@@ -84,7 +103,7 @@ class FullCalendarController extends Controller
 
             }
 
-       $lembretes = Event::whereBetween('start',[$request->start,$request->end])->get();
+       $lembretes = Event::whereBetween('start',[$request->start,$request->end])->where('user_id',auth()->user()->id)->get();
         foreach ($lembretes as $lem){
 
 
@@ -114,6 +133,7 @@ class FullCalendarController extends Controller
     {
         $ids = explode(',',$id);
         $events = [];
+        array_push($ids,auth()->user()->id);
 
         $atendimentos = Atendimento::whereIn('user_id',$ids)->get();
 

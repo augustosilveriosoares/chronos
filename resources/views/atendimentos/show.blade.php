@@ -193,7 +193,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Obeservações') }}</h3>
+                                <h3 class="mb-0">{{ __('Observações') }}</h3>
                             </div>
 
                         </div>
@@ -288,35 +288,35 @@
     <script type="text/javascript">
 
 
-        var switchStatus = false;
-        $("#isonline").on('change', function() {
-            if ($(this).is(':checked')) {
-                document.getElementById('cidade_id').value = 0;
-                $("#cidade_id").prop('required',false);
-                $("#cidade_id").prop('disabled',true);
-            }
-            else {
-                switchStatus = $(this).is(':checked');
-                document.getElementById('cidade_id').value = 1;
-                $("#cidade_id").prop('disabled',false);
-                $("#cidade_id").prop('required',true);
-            }
-        });
+        // var switchStatus = false;
+        // $("#isonline").on('change', function() {
+        //     if ($(this).is(':checked')) {
+        //         document.getElementById('cidade_id').value = 0;
+        //         $("#cidade_id").prop('required',false);
+        //         $("#cidade_id").prop('disabled',true);
+        //     }
+        //     else {
+        //         switchStatus = $(this).is(':checked');
+        //         document.getElementById('cidade_id').value = 1;
+        //         $("#cidade_id").prop('disabled',false);
+        //         $("#cidade_id").prop('required',true);
+        //     }
+        // });
 
 
     </script>
     <script>
-        window.onload = function () {
-            if ( $("#isonline").is(':checked')) {
-
-                $("#cidade_id").prop('disabled',true);
-            }
-            // else {
-            //     switchStatus = $(this).is(':checked');
-            //     document.getElementById('cidade_id').value = 1;
-            //     $("#cidade_id").prop('disabled',false);
-            // }
-        }
+        // window.onload = function () {
+        //     if ( $("#isonline").is(':checked')) {
+        //
+        //         $("#cidade_id").prop('disabled',true);
+        //     }
+        //     // else {
+        //     //     switchStatus = $(this).is(':checked');
+        //     //     document.getElementById('cidade_id').value = 1;
+        //     //     $("#cidade_id").prop('disabled',false);
+        //     // }
+        // }
     </script>
 
 @endpush

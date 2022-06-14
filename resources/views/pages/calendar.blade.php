@@ -82,8 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal - Edit event -->
-                <!--* Modal body *-->
+                <!-- Modal - Edit event -->                <!--* Modal body *-->
                 <!--* Modal footer *-->
                 <!--* Modal init *-->
                 <div class="modal fade" id="edit-event" tabindex="-1" role="dialog" aria-labelledby="edit-event-label" aria-hidden="true">

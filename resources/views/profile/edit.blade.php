@@ -24,7 +24,7 @@
                                 <h3 class="mb-0">{{ __('Edite seu perfil') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{route('user.index')}}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                         </div>
                     </div>

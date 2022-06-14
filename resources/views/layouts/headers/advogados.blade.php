@@ -24,9 +24,8 @@
                     <ul class="list-group list-group-flush">
 
                         <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->agendado?? '0'}}</strong> Agendados</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->analise?? '0'}}</strong> Análise</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->futuro?? '0'}}</strong> Futuro</h4></li>
-                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->infrutifero?? '0'}}</strong> Infrutifero</h4></li>
+
+                        <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->consultoria?? '0'}}</strong> Consultoria</h4></li>
                         <li class="list-group-item"><h4 class="text-muted text-center"><strong class="text-primary">{{$adv->processo?? '0'}}</strong> Processos</h4></li>
                     </ul>
                 </div>
@@ -48,7 +47,7 @@
             <div class="row">
         @endif
         {{--ZERA O PONTEIRO DAS COLUNAS--}}
-        @php  $i = 0;  @endphp
+        @php  $i = 0; $y = 0; @endphp
     @endif
     {{--INCREMENTA I        --}}
     @php  $i = $i+1;  @endphp
