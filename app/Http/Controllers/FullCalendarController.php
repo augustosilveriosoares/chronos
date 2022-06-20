@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Atendimento;
 use App\Event;
+use Carbon\Carbon;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class FullCalendarController extends Controller
 {
@@ -26,20 +28,28 @@ class FullCalendarController extends Controller
         //$atendimentos = Atendimento::all();
         $atendimentos = Atendimento::where('situacao_id',2)->get();
 
+
+
+
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
                 if($eve->situacao->descricao == 'Agendado'){
                     $event = new Event();
                     $event->atendimento_id = $eve->id;
-                    $event->title = $eve->nome;
+//                    $event->title =  substr($eve->tipoatendimento->descricao,0,1) .' - '. $eve->nome;
+                    $event->title =   $eve->nome;
                     $event->description = $eve->necessidade->descriacao;
                     $event->allDay = false;
                     $event->start = $eve->dataagendamento;
                     $event->user_id = $eve->user_id;
                     $event->color = $eve->user->color;
 
+                    if($eve->tipoatendimento->id = 1 || $eve->tipoatendimento->id = 2){
+                        if($eve->dataagendamento > now()){
+                            array_push($events,$event);
+                        }
+                    }
 
-                    array_push($events,$event);
 
                 }
             }
@@ -87,16 +97,40 @@ class FullCalendarController extends Controller
             foreach ($atendimentos as $eve){
                 if(!is_null($eve->getDataAgendamento())){
                     if($eve->situacao->descricao == 'Agendado'){
+
+                        $date = new \DateTime($eve->dataagendamento);
+                        $hoje = new \DateTime("today");
                         $event = new Event();
                         $event->atendimento_id = $eve->id;
                         $event->id = $eve->id;
-                        $event->title = $eve->nome;
+                        $event->title =  $eve->nome;
                         $event->description = $eve->necessidade->descriacao;
                         $event->allDay = false;
                         $event->start = $eve->dataagendamento;
                         $event->user_id = $eve->user_id;
                         $event->color = $eve->user->color;
-                        array_push($events,$event);
+
+                        switch ($eve->tipoatendimento->id) {
+                            case 3:
+                                // se for Informação
+                                if($date >= $hoje) {
+                                    array_push($events, $event);
+                                }
+                                break;
+                            case 4:
+                                // se for orientacao
+                                if($date >= $hoje){
+                                    array_push($events,$event);
+                                }
+                                break;
+                            case 2:
+                                array_push($events,$event);
+                                break;
+
+                            case 3:
+                                array_push($events,$event);
+                                break;
+                        }
 
                     }
                 }
@@ -115,6 +149,8 @@ class FullCalendarController extends Controller
                     $event->start = $lem->start;
                     $event->user_id = $lem->user_id;
                     $event->color = $lem->color;
+
+
                     array_push($events,$event);
 
 
@@ -139,9 +175,16 @@ class FullCalendarController extends Controller
 
 
 
+
+
         foreach ($atendimentos as $eve){
             if(!is_null($eve->getDataAgendamento())){
                 if($eve->situacao->descricao == 'Agendado'){
+
+                    $date = new \DateTime($eve->dataagendamento);
+                    $hoje = new \DateTime("today");
+
+
                     $event = new Event();
                     $event->atendimento_id = $eve->id;
                     $event->title = $eve->nome;
@@ -150,7 +193,28 @@ class FullCalendarController extends Controller
                     $event->start = $eve->dataagendamento;
                     $event->user_id = $eve->user_id;
                     $event->color = $eve->user->color;
-                    array_push($events,$event);
+                    switch ($eve->tipoatendimento->id) {
+                        case 3:
+                            // se for Informação
+                            if($date >= $hoje) {
+                                array_push($events, $event);
+                            }
+                            break;
+                        case 4:
+                            // se for orientacao
+                            if($date >= $hoje){
+                                array_push($events,$event);
+                            }
+                            break;
+                        case 2:
+                            array_push($events,$event);
+                            break;
+
+                        case 3:
+                            array_push($events,$event);
+                            break;
+                    }
+
 
                 }
             }
