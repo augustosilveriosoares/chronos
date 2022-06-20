@@ -38,7 +38,7 @@
 
                                     <div class="col-lg col-sm-6">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="customCheck" class="custom-control-input" id="customCheck{{$adv->name}}" value="{{$adv->id}}">
+                                            <input type="checkbox" name="customCheck" class="custom-control-input" id="customCheck{{$adv->name}}" value="{{$adv->id}}" {{ in_array($adv->id,session('adv_ids') ?? []) == '1' ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="customCheck{{$adv->name}}">{{$adv->name}}</label>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
 
             var calendarEl = document.getElementById('calendar');
             var $ids = [];
-            {{--var eventos = @json($events);--}}
+            
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -289,8 +289,9 @@
                 },
 
                 // events: eventos,
-                events: "{{route('fullcalendar.events')}}",
-
+                //events: "{{route('fullcalendar.events')}}",
+                //events: '{!! $events !!}',
+                events: getUrlCalendar(),
 
 
                 initialView: 'dayGridMonth',
@@ -349,6 +350,14 @@
             });
 
             calendar.render();
+
+            function getUrlCalendar(){
+                $ids = getChecklistItems();
+                let url = "{{ route('fullcalendar.events',':p') }}";
+                url = url.replace(':p', $ids);
+                console.log(url);
+                return url;
+            }
 
             function setNewUrlCalendar(){
 
